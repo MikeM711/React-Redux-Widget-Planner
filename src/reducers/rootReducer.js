@@ -13,19 +13,19 @@ const initState = {
       _18GA_CR_120x48: 51,
     },
   ],
-  doorHistory: [],
-  qtyHistory: [],
+  resultHistory: [
+  ]
 }
 
 function rootReducer(state = initState, action){
-  console.log(state) // logs state before the action
+  //console.log(state) // logs state before the action
+  //action.doorInfo ---- doorSelect , qtySelect
   if(action.type === 'ADD_DOOR') {
     return {
       ...state,
-      doorHistory: [...state.doorHistory, action.doorInfo.doorSelect],
-      qtyHistory: [...state.qtyHistory, action.doorInfo.qtySelect],
+      resultHistory: [...state.resultHistory, action.doorInfo]
+      }
     }
-  }
   return state
 }
 

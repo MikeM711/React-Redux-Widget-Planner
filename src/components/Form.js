@@ -5,11 +5,14 @@ class Form extends Component {
   state = {
     doorSelect: '',
     qtySelect: '',
+    id: '',
   }
 
   handleDoorChange = (event) => {
+    let id = Math.random()
     this.setState({
-      doorSelect: event.target.value
+      doorSelect: event.target.value,
+      id: id
     })
   }
 
