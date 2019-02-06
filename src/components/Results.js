@@ -9,48 +9,22 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props)
 
-    const doorResult = this.props.resultHistory.length ? (
-      this.props.resultHistory.map(result => {
-        
-        // initialize object properties
-        let initProps = {
-          _14GA_CR_120x60: 0,
-          _16GA_CR_120x48: 0,
-          _16GA_CR_120x60: 0,
-          _18GA_CR_120x48: 0,
-          _18GA_CR_120x60: 0,
-          _20GA_CR_120x48: 0,
-          _14GA_AL_120x60: 0,
-        }
+    const doorResult = this.props.completeHistory.length ? (
+      this.props.completeHistory.map(result => {
 
-        // Find all the information about the current door
-        let currentDoorInfo = this.props.doors.find(doorInfo => {
-          return doorInfo.door === result.doorSelect
-        })
-        
-        // Combine all information about current door with initialized properties
-        const completeInfo = Object.assign(initProps,currentDoorInfo)
-
-        // Destructuring off completeInfo object
-        let { _14GA_CR_120x60, _16GA_CR_120x48, _16GA_CR_120x60, _18GA_CR_120x48, _18GA_CR_120x60, _20GA_CR_120x48, door } = completeInfo
-
-        // What to do with QTY Number
-        if(door.includes('GP100')){
-          _14GA_CR_120x60 = Math.ceil((result.qtySelect/_14GA_CR_120x60) * 100) / 100
-          _18GA_CR_120x48 = Math.ceil((result.qtySelect/_18GA_CR_120x48) * 100) / 100
-        }
+        // Destructuring off completeHistory object
+        let { _14GA_CR_120x60, _16GA_CR_120x48, _16GA_CR_120x60, _18GA_CR_120x48, _18GA_CR_120x60, _20GA_CR_120x48,_14GA_AL_120x60, doorSelect, qtySelect, id } = result
 
         // Return collapsible collection-items
         return(
-          <div className="collection-item" key={result.id}  >
+          <div className="collection-item" key={id}  >
             <table>
               <tbody>
                 <tr>
                   <td className="collapsible-items">
-                    <Collapsible trigger={`Door: ${result.doorSelect} | QTY: ${result.qtySelect}`} transitionTime={50} open={false}>
-                      <h6>Door: {result.doorSelect} | QTY: {result.qtySelect}</h6>
+                    <Collapsible trigger={`Door: ${doorSelect} | QTY: ${qtySelect}`} transitionTime={50} open={false}>
+                      <h6>Door: {doorSelect} | QTY: {qtySelect}</h6>
                       <p className="center">{_14GA_CR_120x60} | 14GA CR Sheets 120x60</p>
                       <p className="center">{_16GA_CR_120x48} | 16GA CR Sheets 120x48</p>
                       <p className="center">{_16GA_CR_120x60} | 16GA CR Sheets 120x60</p>
@@ -58,7 +32,7 @@ class Results extends Component {
                       <p className="center">{_18GA_CR_120x60} | 18GA CR Sheets 120x60</p>
                       <p className="center">{_20GA_CR_120x48} | 20GA CR Sheets 120x60</p>
                       <hr />
-                      <p className="center">{completeInfo._14GA_AL_120x60} | 14GA AL Sheets 120x60</p>
+                      <p className="center">{_14GA_AL_120x60} | 14GA AL Sheets 120x60</p>
                     </Collapsible>
                   </td>
                   <td className="delete-button">
@@ -85,9 +59,54 @@ class Results extends Component {
 }
 
 const mapStateToProps = (state) => {
+
+  // Move this into a Selector inside a Reducer
+
+  const completeHistory = state.resultHistory.length ? (
+    state.resultHistory.map(result => {
+      
+      // Initialize object properties
+      let initProps = {
+        doorSelect: result.doorSelect,
+        qtySelect: result.qtySelect,
+        _14GA_CR_120x60: 0,
+        _16GA_CR_120x48: 0,
+        _16GA_CR_120x60: 0,
+        _18GA_CR_120x48: 0,
+        _18GA_CR_120x60: 0,
+        _20GA_CR_120x48: 0,
+        _14GA_AL_120x60: 0,
+      }
+
+      // Find all the information about the current door the User has clicked
+      let currentDoorInfo = state.doors.find(doorInfo => {
+        return result.doorSelect === doorInfo.door
+      })
+      
+      // Combine all information about current door with initialized properties
+      const completeInfo = Object.assign(initProps,currentDoorInfo)
+
+      // We want the id from the Form, not the database
+      completeInfo.id = result.id
+
+      // What to do with QTY Number
+      if(result.doorSelect.includes('GP100')){
+        completeInfo._14GA_CR_120x60 = Math.ceil((result.qtySelect/completeInfo._14GA_CR_120x60) * 100) / 100
+
+        completeInfo._18GA_CR_120x48 = Math.ceil((result.qtySelect/completeInfo._18GA_CR_120x48) * 100) / 100
+      }
+
+      return completeInfo
+
+    })
+  ): ([])
+
+  console.log(completeHistory)
+
   return{
     doors: state.doors,
     resultHistory: state.resultHistory,
+    completeHistory: completeHistory
   }
 }
 
