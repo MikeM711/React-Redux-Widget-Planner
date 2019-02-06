@@ -17,15 +17,28 @@ const initState = {
   ]
 }
 
-function rootReducer(state = initState, action){
-  //console.log(state) // logs state before the action
-  //action.doorInfo ---- doorSelect , qtySelect
-  if(action.type === 'ADD_DOOR') {
+function rootReducer(state = initState, action) {
+
+  // Add door to resultHistory
+  if (action.type === 'ADD_DOOR') {
     return {
       ...state,
       resultHistory: [...state.resultHistory, action.doorInfo]
-      }
     }
+  }
+
+  // Delete door from resultHistory
+  if (action.type === 'DELETE_DOOR') {
+    const newHistory = state.resultHistory.filter(doorInfo => {
+      return doorInfo.id !== action.id
+    })
+    return {
+      ...state,
+      resultHistory: newHistory
+    }
+  }
+  
+  // Return new state to Redux
   return state
 }
 

@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
 
 class Results extends Component {
+
+  handleDelete = (id) => {
+    this.props.deleteDoor(id)
+  }
+
   render() {
     console.log(this.props)
 
@@ -57,7 +62,7 @@ class Results extends Component {
                     </Collapsible>
                   </td>
                   <td className="delete-button">
-                    <button className="delete-btn btn-floating btn-large waves-effect waves-light red">X</button>
+                    <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => {this.handleDelete(result.id)}}>X</button>
                   </td>
                 </tr>
               </tbody>
@@ -86,4 +91,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Results);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteDoor: (id) => {dispatch({type: 'DELETE_DOOR',id: id})}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);
