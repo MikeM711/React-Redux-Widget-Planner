@@ -56,3 +56,27 @@
     font-size: 12px;
     background-color: #CBB700;
     color: black; }
+
+tr, td, th
+{
+  border: 0;
+}
+
+td.collapsible-items {
+ width:99%;
+}
+
+td.delete-button {
+float: right;
+transform: scale(0.7);
+}
+
+button.delete-btn {
+  font-size:30px;
+  transition: 0.3s
+}
+
+button.delete-btn:hover {
+  opacity: 0.8; 
+  transition: 0.3s
+}
