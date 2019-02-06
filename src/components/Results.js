@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Collapsible from 'react-collapsible';
 
 class Results extends Component {
   render() {
@@ -24,21 +25,33 @@ class Results extends Component {
           return doorInfo.door === result.doorSelect
         })
         
-        // All information about current door with initialized properties
+        // Combine all information about current door with initialized properties
         const completeInfo = Object.assign(initProps,currentDoorInfo)
-        //console.log(result.qtySelect)
+        console.log(completeInfo)
 
+        // Destructuring off completeInfo object
+        let { _14GA_CR_120x60, _16GA_CR_120x48, _16GA_CR_120x60, _18GA_CR_120x48, _18GA_CR_120x60, _20GA_CR_120x48, door } = completeInfo
+
+        // What to do with QTY Number
+        if(door.includes('GP100')){
+          _14GA_CR_120x60 = Math.ceil((result.qtySelect/_14GA_CR_120x60) * 100) / 100
+          _18GA_CR_120x48 = Math.ceil((result.qtySelect/_18GA_CR_120x48) * 100) / 100
+        }
+
+        // Return collapsible collection-items
         return(
-        <div className="collection-item" key={result.id}>
+        <div className="collection-item" key={result.id}  >
+        <Collapsible trigger={`Door: ${result.doorSelect} | QTY: ${result.qtySelect}`} transitionTime={50} open={false}>
           <h6>Door: {result.doorSelect} | QTY: {result.qtySelect}</h6>
-          <p className="center">{completeInfo._14GA_CR_120x60} | 14GA CR Sheets 120x60</p>
-          <p className="center">{completeInfo._16GA_CR_120x48} | 16GA CR Sheets 120x48</p>
-          <p className="center">{completeInfo._16GA_CR_120x60} | 16GA CR Sheets 120x60</p>
-          <p className="center">{completeInfo._18GA_CR_120x48} | 18GA CR Sheets 120x48</p>
-          <p className="center">{completeInfo._18GA_CR_120x60} | 18GA CR Sheets 120x60</p>
-          <p className="center">{completeInfo._20GA_CR_120x48} | 20GA CR Sheets 120x60</p>
+          <p className="center">{_14GA_CR_120x60} | 14GA CR Sheets 120x60</p>
+          <p className="center">{_16GA_CR_120x48} | 16GA CR Sheets 120x48</p>
+          <p className="center">{_16GA_CR_120x60} | 16GA CR Sheets 120x60</p>
+          <p className="center">{_18GA_CR_120x48} | 18GA CR Sheets 120x48</p>
+          <p className="center">{_18GA_CR_120x60} | 18GA CR Sheets 120x60</p>
+          <p className="center">{_20GA_CR_120x48} | 20GA CR Sheets 120x60</p>
           <hr/>
           <p className="center">{completeInfo._14GA_AL_120x60} | 14GA AL Sheets 120x60</p>
+          </Collapsible>
         </div>
         )
       })
@@ -46,7 +59,7 @@ class Results extends Component {
       <p className="center text-blue">No Doors!</p>
     )
     return (
-      <div className="App">
+      <div className="calculator-results">
         <h5 className="center green-text">Results Component</h5>
         <div className="collection">
           {doorResult}

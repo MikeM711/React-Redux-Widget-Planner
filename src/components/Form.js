@@ -6,6 +6,7 @@ class Form extends Component {
     doorSelect: '',
     qtySelect: '',
     id: '',
+    errorMsg: '',
   }
 
   handleDoorChange = (event) => {
@@ -24,11 +25,42 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addDoor(this.state)
-    this.setState({
-      doorSelect: '',
-      qtySelect: '',
-    })
+
+    // if Door Select is blank or QTY Select is blank, handle error
+    if(!this.state.doorSelect || !this.state.qtySelect){
+      this.handleError()
+    }
+    
+    // if Door Select and QTY select are both filled
+    if(this.state.doorSelect && this.state.qtySelect){
+      this.props.addDoor(this.state)
+      this.setState({
+        doorSelect: '',
+        qtySelect: '',
+        errorMsg: '',
+      })
+    }
+  }
+
+  handleError = () => {
+    if(!this.state.doorSelect && this.state.qtySelect){
+      this.setState({
+        errorMsg: 'Please Select A Door'
+      })
+    }
+
+    if(!this.state.qtySelect && this.state.doorSelect){
+      this.setState({
+        errorMsg: 'Please Input A Quantity'
+      })
+    }
+
+    if(!this.state.qtySelect && !this.state.doorSelect){
+      this.setState({
+        errorMsg: 'Please Select A Door And Input A Quantity'
+      })
+    }
+
   }
 
   render() {
@@ -42,6 +74,7 @@ class Form extends Component {
     return (
       <div className="calculator-form">
         <h5 className="center red-text">Form Component</h5>
+        <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
           <select className="browser-default" onChange={this.handleDoorChange} value={this.state.doorSelect}>
             <option value=''>-- Choose A Door --</option>
