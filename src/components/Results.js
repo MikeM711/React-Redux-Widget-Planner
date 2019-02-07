@@ -10,7 +10,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log(selectCompleteHistory)
     const doorResult = this.props.completeHistory.length ? (
       this.props.completeHistory.map(result => {
 

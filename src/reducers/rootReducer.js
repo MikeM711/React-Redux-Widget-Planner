@@ -25,15 +25,6 @@ const initState = {
   ],
   resultHistory: [
   ],
-  combinedHistory: {
-    _14GA_CR_120x60: 0,
-    _16GA_CR_120x48: 0,
-    _16GA_CR_120x60: 0,
-    _18GA_CR_120x48: 0,
-    _18GA_CR_120x60: 0,
-    _20GA_CR_120x48: 0,
-    _14GA_AL_120x60: 0,
-  }
 }
 
 function rootReducer(state = initState, action) {
