@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
+import { selectCompleteHistory } from '../reducers/rootReducer'
 
 class Results extends Component {
 
@@ -9,7 +10,7 @@ class Results extends Component {
   }
 
   render() {
-
+    console.log(selectCompleteHistory)
     const doorResult = this.props.completeHistory.length ? (
       this.props.completeHistory.map(result => {
 
@@ -60,53 +61,10 @@ class Results extends Component {
 
 const mapStateToProps = (state) => {
 
-  // Move this into a Selector inside a Reducer
-
-  const completeHistory = state.resultHistory.length ? (
-    state.resultHistory.map(result => {
-      
-      // Initialize object properties
-      let initProps = {
-        doorSelect: result.doorSelect,
-        qtySelect: result.qtySelect,
-        _14GA_CR_120x60: 0,
-        _16GA_CR_120x48: 0,
-        _16GA_CR_120x60: 0,
-        _18GA_CR_120x48: 0,
-        _18GA_CR_120x60: 0,
-        _20GA_CR_120x48: 0,
-        _14GA_AL_120x60: 0,
-      }
-
-      // Find all the information about the current door the User has clicked
-      let currentDoorInfo = state.doors.find(doorInfo => {
-        return result.doorSelect === doorInfo.door
-      })
-      
-      // Combine all information about current door with initialized properties
-      const completeInfo = Object.assign(initProps,currentDoorInfo)
-
-      // We want the id from the Form, not the database
-      completeInfo.id = result.id
-
-      // What to do with QTY Number
-      if(result.doorSelect.includes('GP100')){
-        completeInfo._14GA_CR_120x60 = Math.ceil((result.qtySelect/completeInfo._14GA_CR_120x60) * 100) / 100
-
-        completeInfo._18GA_CR_120x48 = Math.ceil((result.qtySelect/completeInfo._18GA_CR_120x48) * 100) / 100
-      }
-
-      return completeInfo
-
-    })
-  ): ([])
-
-  console.log(completeHistory)
-
   return{
     doors: state.doors,
     resultHistory: state.resultHistory,
-    completeHistory: completeHistory
+    completeHistory: selectCompleteHistory(state)
   }
 }
 
