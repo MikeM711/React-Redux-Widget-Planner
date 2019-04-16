@@ -50,7 +50,7 @@ function rootReducer(state = initState, action) {
   return state
 }
 
-export const selectCompleteHistory = (state) => {
+export const completeUserHistory = (state) => {
 
   const completeHistory = state.resultHistory.length ? (
     state.resultHistory.map(result => {
@@ -74,7 +74,7 @@ export const selectCompleteHistory = (state) => {
       // Combine all information about current widget with initialized properties
       const calcWgt = Object.assign(initProps, stateWgtInfo)
 
-      // We want the id from the Form, not the database
+      // We want the id from the Form (random integer), not the id from the widgets list
       calcWgt.id = result.id
 
       console.log('complete info', calcWgt)

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectCompleteHistory } from '../../reducers/rootReducer'
+import { completeUserHistory } from '../../reducers/rootReducer'
 
-class CombinedResults extends Component {
+class ResultTotal extends Component {
 
   // Function makes all products rounded 2 decimal places
   rounding2Dec = (number) => {
@@ -20,7 +20,7 @@ class CombinedResults extends Component {
       sSteel: 0,
     }
 
-    // Sum all materialize by type inside sumHistory object
+    // Sum all materials by type inside sumHistory object
     this.props.completeHistory.forEach(singleHis => {
       sumHistory.alum += singleHis.alum
       sumHistory.crSteel += singleHis.crSteel
@@ -41,7 +41,7 @@ class CombinedResults extends Component {
     // History Display
     const historyDisplay =
       (
-        <div className="combined-collection-item">
+        <div className="total-user-result">
           <p className="center">{sumHistory.alum} | Aluminum</p>
           <p className="center">{sumHistory.crSteel} | Cold Rolled Steel</p>
           <p className="center">{sumHistory.galv} | Galvanneal</p>
@@ -51,8 +51,8 @@ class CombinedResults extends Component {
       )
 
     return (
-      <div className="calculator-combined-results">
-        <h5 className="center purple-text">CombinedResults Component</h5>
+      <div className="calculator-total-result">
+        <h5 className="center purple-text">Total Component</h5>
         <div className="collection">
           {historyDisplay}
         </div>
@@ -63,8 +63,8 @@ class CombinedResults extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    completeHistory: selectCompleteHistory(state)
+    completeHistory: completeUserHistory(state)
   }
 }
 
-export default connect(mapStateToProps)(CombinedResults);
+export default connect(mapStateToProps)(ResultTotal);
