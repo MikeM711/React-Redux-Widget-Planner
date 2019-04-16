@@ -27,12 +27,12 @@ class Form extends Component {
     event.preventDefault();
 
     // if Door Select is blank or QTY Select is blank, handle error
-    if(!this.state.doorSelect || !this.state.qtySelect){
+    if (!this.state.doorSelect || !this.state.qtySelect) {
       this.handleError()
     }
-    
+
     // if Door Select and QTY select are both filled
-    if(this.state.doorSelect && this.state.qtySelect){
+    if (this.state.doorSelect && this.state.qtySelect) {
       this.props.addDoor(this.state)
       this.setState({
         doorSelect: '',
@@ -43,19 +43,19 @@ class Form extends Component {
   }
 
   handleError = () => {
-    if(!this.state.doorSelect && this.state.qtySelect){
+    if (!this.state.doorSelect && this.state.qtySelect) {
       this.setState({
         errorMsg: 'Please Select A Door'
       })
     }
 
-    if(!this.state.qtySelect && this.state.doorSelect){
+    if (!this.state.qtySelect && this.state.doorSelect) {
       this.setState({
         errorMsg: 'Please Input A Quantity'
       })
     }
 
-    if(!this.state.qtySelect && !this.state.doorSelect){
+    if (!this.state.qtySelect && !this.state.doorSelect) {
       this.setState({
         errorMsg: 'Please Select A Door And Input A Quantity'
       })
@@ -90,7 +90,7 @@ class Form extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     doors: state.doors,
     state: state, // to keep tabs on Redux Store
   }
@@ -98,7 +98,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addDoor: (doorInfo) => {dispatch({type:'ADD_DOOR', doorInfo: doorInfo})}
+    addDoor: (doorInfo) => { dispatch({ type: 'ADD_WIDGET', doorInfo: doorInfo }) }
   }
 }
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Form from './components/Form'
-import Results from './components/Results'
-import CombinedResults from './components/CombinedResults'
+import Form from './components/Form/Form'
+import Results from './components/Results/Results'
+import CombinedResults from './components/CombinedResults/CombinedResults'
 
 class App extends Component {
 
   render() {
     return (
       <div className="wbCalculator container">
-        <h2 className="center blue-text">WB Door Material Calculator</h2>
+        <h2 className="center blue-text">Widget Material Calculator</h2>
         <Form />
         <Results />
         <CombinedResults />

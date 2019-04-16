@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
-import { selectCompleteHistory } from '../reducers/rootReducer'
+import { selectCompleteHistory } from '../../reducers/rootReducer'
 
 class Results extends Component {
 
@@ -14,10 +14,10 @@ class Results extends Component {
       this.props.completeHistory.map(result => {
 
         // Destructuring off completeHistory object
-        let { _14GA_CR_120x60, _16GA_CR_120x48, _16GA_CR_120x60, _18GA_CR_120x48, _18GA_CR_120x60, _20GA_CR_120x48,_14GA_AL_120x60, doorSelect, qtySelect, id } = result
+        let { alum, crSteel, galv, glass, sSteel, doorSelect, qtySelect, id } = result
 
         // Return collapsible collection-items
-        return(
+        return (
           <div className="collection-item" key={id}  >
             <table>
               <tbody>
@@ -25,18 +25,15 @@ class Results extends Component {
                   <td className="collapsible-items">
                     <Collapsible trigger={`Door: ${doorSelect} | QTY: ${qtySelect}`} transitionTime={50} open={false}>
                       <h6>Door: {doorSelect} | QTY: {qtySelect}</h6>
-                      <p className="center">{_14GA_CR_120x60} | 14GA CR Sheets 120x60</p>
-                      <p className="center">{_16GA_CR_120x48} | 16GA CR Sheets 120x48</p>
-                      <p className="center">{_16GA_CR_120x60} | 16GA CR Sheets 120x60</p>
-                      <p className="center">{_18GA_CR_120x48} | 18GA CR Sheets 120x48</p>
-                      <p className="center">{_18GA_CR_120x60} | 18GA CR Sheets 120x60</p>
-                      <p className="center">{_20GA_CR_120x48} | 20GA CR Sheets 120x60</p>
-                      <hr />
-                      <p className="center">{_14GA_AL_120x60} | 14GA AL Sheets 120x60</p>
+                      <p className="center">{alum} | Aluminum</p>
+                      <p className="center">{crSteel} | Cold Rolled Steel</p>
+                      <p className="center">{galv} | Galvanneal</p>
+                      <p className="center">{glass} | Glass</p>
+                      <p className="center">{sSteel} | Stainless Steel</p>
                     </Collapsible>
                   </td>
                   <td className="delete-button">
-                    <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => {this.handleDelete(result.id)}}>X</button>
+                    <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => { this.handleDelete(result.id) }}>X</button>
                   </td>
                 </tr>
               </tbody>
@@ -45,8 +42,8 @@ class Results extends Component {
         )
       })
     ) : (
-      <p className="center text-blue">No Doors!</p>
-    )
+        <p className="center text-blue">No Doors!</p>
+      )
     return (
       <div className="calculator-results">
         <h5 className="center green-text">Results Component</h5>
@@ -60,7 +57,7 @@ class Results extends Component {
 
 const mapStateToProps = (state) => {
 
-  return{
+  return {
     doors: state.doors,
     resultHistory: state.resultHistory,
     completeHistory: selectCompleteHistory(state)
@@ -69,7 +66,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteDoor: (id) => {dispatch({type: 'DELETE_DOOR',id: id})}
+    deleteDoor: (id) => { dispatch({ type: 'DELETE_WIDGET', id: id }) }
   }
 }
 
