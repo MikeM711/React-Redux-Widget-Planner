@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 
 class Form extends Component {
   state = {
-    doorSelect: '',
+    widgetSelect: '',
     qtySelect: '',
     id: '',
     errorMsg: '',
   }
 
-  handleDoorChange = (event) => {
+  handleWidgetChange = (event) => {
     let id = Math.random()
     this.setState({
-      doorSelect: event.target.value,
+      widgetSelect: event.target.value,
       id: id
     })
   }
@@ -26,16 +26,16 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // if Door Select is blank or QTY Select is blank, handle error
-    if (!this.state.doorSelect || !this.state.qtySelect) {
+    // if Widget Select is blank or QTY Select is blank, handle error
+    if (!this.state.widgetSelect || !this.state.qtySelect) {
       this.handleError()
     }
 
-    // if Door Select and QTY select are both filled
-    if (this.state.doorSelect && this.state.qtySelect) {
-      this.props.addDoor(this.state)
+    // if Widget Select and QTY select are both filled
+    if (this.state.widgetSelect && this.state.qtySelect) {
+      this.props.addWidget(this.state)
       this.setState({
-        doorSelect: '',
+        widgetSelect: '',
         qtySelect: '',
         errorMsg: '',
       })
@@ -43,31 +43,31 @@ class Form extends Component {
   }
 
   handleError = () => {
-    if (!this.state.doorSelect && this.state.qtySelect) {
+    if (!this.state.widgetSelect && this.state.qtySelect) {
       this.setState({
-        errorMsg: 'Please Select A Door'
+        errorMsg: 'Please Select A Widget'
       })
     }
 
-    if (!this.state.qtySelect && this.state.doorSelect) {
+    if (!this.state.qtySelect && this.state.widgetSelect) {
       this.setState({
         errorMsg: 'Please Input A Quantity'
       })
     }
 
-    if (!this.state.qtySelect && !this.state.doorSelect) {
+    if (!this.state.qtySelect && !this.state.widgetSelect) {
       this.setState({
-        errorMsg: 'Please Select A Door And Input A Quantity'
+        errorMsg: 'Please Select A Widget And Input A Quantity'
       })
     }
 
   }
 
   render() {
-    // Some JSX for the list of doors inside Select
-    const doorList = this.props.doors.map(doorInfo => {
+    // Some JSX for the list of widgets inside Select
+    const widgetList = this.props.widgets.map(widgetInfo => {
       return (
-        <option value={doorInfo.door} key={doorInfo.id}>{doorInfo.door}</option>
+        <option value={widgetInfo.widget} key={widgetInfo.id}>{widgetInfo.widget}</option>
       )
     })
 
@@ -76,11 +76,11 @@ class Form extends Component {
         <h5 className="center red-text">Form Component</h5>
         <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
-          <select className="browser-default" onChange={this.handleDoorChange} value={this.state.doorSelect}>
-            <option value=''>-- Choose A Door --</option>
-            {doorList}
+          <select className="browser-default" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
+            <option value=''>-- Choose A Widget --</option>
+            {widgetList}
           </select>
-          <input placeholder="Number of Doors" id="door_quantity" type="text" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
+          <input placeholder="Number of Widgets" id="widget_quantity" type="text" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
           <br></br>
           <button className="btn waves-effect waves-light formbtn" >Calculate</button>
         </form>
@@ -91,14 +91,14 @@ class Form extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    doors: state.doors,
+    widgets: state.widgets,
     state: state, // to keep tabs on Redux Store
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addDoor: (doorInfo) => { dispatch({ type: 'ADD_WIDGET', doorInfo: doorInfo }) }
+    addWidget: (widgetInfo) => { dispatch({ type: 'ADD_WIDGET', widgetInfo: widgetInfo }) }
   }
 }
 

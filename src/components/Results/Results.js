@@ -6,15 +6,15 @@ import { selectCompleteHistory } from '../../reducers/rootReducer'
 class Results extends Component {
 
   handleDelete = (id) => {
-    this.props.deleteDoor(id)
+    this.props.deleteWidget(id)
   }
 
   render() {
-    const doorResult = this.props.completeHistory.length ? (
+    const widgetResult = this.props.completeHistory.length ? (
       this.props.completeHistory.map(result => {
 
         // Destructuring off completeHistory object
-        let { alum, crSteel, galv, glass, sSteel, doorSelect, qtySelect, id } = result
+        let { alum, crSteel, galv, glass, sSteel, widgetSelect, qtySelect, id } = result
 
         // Return collapsible collection-items
         return (
@@ -23,8 +23,8 @@ class Results extends Component {
               <tbody>
                 <tr>
                   <td className="collapsible-items">
-                    <Collapsible trigger={`Door: ${doorSelect} | QTY: ${qtySelect}`} transitionTime={50} open={false}>
-                      <h6>Door: {doorSelect} | QTY: {qtySelect}</h6>
+                    <Collapsible trigger={`Widget: ${widgetSelect} | QTY: ${qtySelect}`} transitionTime={50} open={false}>
+                      <h6>Widget: {widgetSelect} | QTY: {qtySelect}</h6>
                       <p className="center">{alum} | Aluminum</p>
                       <p className="center">{crSteel} | Cold Rolled Steel</p>
                       <p className="center">{galv} | Galvanneal</p>
@@ -42,13 +42,13 @@ class Results extends Component {
         )
       })
     ) : (
-        <p className="center text-blue">No Doors!</p>
+        <p className="center text-blue">No Widgets!</p>
       )
     return (
       <div className="calculator-results">
         <h5 className="center green-text">Results Component</h5>
         <div className="collection">
-          {doorResult}
+          {widgetResult}
         </div>
       </div>
     );
@@ -58,15 +58,15 @@ class Results extends Component {
 const mapStateToProps = (state) => {
 
   return {
-    doors: state.doors,
-    resultHistory: state.resultHistory,
+    widgets: state.widgets, // not used
+    resultHistory: state.resultHistory, // not used
     completeHistory: selectCompleteHistory(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteDoor: (id) => { dispatch({ type: 'DELETE_WIDGET', id: id }) }
+    deleteWidget: (id) => { dispatch({ type: 'DELETE_WIDGET', id: id }) }
   }
 }
 

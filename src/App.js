@@ -7,7 +7,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wbCalculator container">
+      <div className="widget container">
         <h2 className="center blue-text">Widget Material Calculator</h2>
         <Form />
         <Results />

@@ -1,8 +1,8 @@
 const initState = {
-  doors: [
+  widgets: [
     {
       id: 1,
-      door: 'Widget A',
+      widget: 'Widget A',
       alum: 1,
       crSteel: 1,
       galv: 1,
@@ -11,7 +11,7 @@ const initState = {
     },
     {
       id: 2,
-      door: 'Widget B',
+      widget: 'Widget B',
       alum: 5,
       crSteel: 5,
       galv: 5,
@@ -27,18 +27,18 @@ function rootReducer(state = initState, action) {
 
   const { resultHistory } = state
 
-  // Add door to resultHistory
+  // Add widget to resultHistory
   if (action.type === 'ADD_WIDGET') {
     return {
       ...state,
-      resultHistory: [...resultHistory, action.doorInfo]
+      resultHistory: [...resultHistory, action.widgetInfo]
     }
   }
 
-  // Delete door from resultHistory
+  // Delete widget from resultHistory
   if (action.type === 'DELETE_WIDGET') {
-    const newHistory = resultHistory.filter(doorInfo => {
-      return doorInfo.id !== action.id
+    const newHistory = resultHistory.filter(widgetInfo => {
+      return widgetInfo.id !== action.id
     })
     return {
       ...state,
@@ -57,7 +57,7 @@ export const selectCompleteHistory = (state) => {
 
       // Initialize object properties
       let initProps = {
-        doorSelect: result.doorSelect,
+        widgetSelect: result.widgetSelect,
         qtySelect: result.qtySelect,
         alum: 0,
         crSteel: 0,
@@ -67,8 +67,8 @@ export const selectCompleteHistory = (state) => {
       }
 
       // Find all the information about the current widget the User has clicked
-      let stateWgtInfo = state.doors.find(wgtInfo => {
-        return result.doorSelect === wgtInfo.door
+      let stateWgtInfo = state.widgets.find(wgtInfo => {
+        return result.widgetSelect === wgtInfo.widget
       })
 
       // Combine all information about current widget with initialized properties
