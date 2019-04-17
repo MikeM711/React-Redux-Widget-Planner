@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios'
 
 class Form extends Component {
   state = {
@@ -7,6 +8,19 @@ class Form extends Component {
     qtySelect: '',
     id: '',
     errorMsg: '',
+  }
+
+  componentDidMount() {
+
+    // When component mounts, display all todos from Database, by cycling through each widget
+    axios.get('/widgets')
+      .then(res => {
+        for (let i = 0; i < res.data.widgets.length; i++) {
+          // dispatch particular widget from DB to Redux
+          this.props.fetchWidgets(res.data.widgets[i]);
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   handleWidgetChange = (event) => {
@@ -98,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addWidget: (widgetInfo) => { dispatch({ type: 'ADD_WIDGET', widgetInfo: widgetInfo }) }
+    addWidget: (widgetInfo) => { dispatch({ type: 'ADD_WIDGET', widgetInfo: widgetInfo }) },
+    fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) }
   }
 }
 

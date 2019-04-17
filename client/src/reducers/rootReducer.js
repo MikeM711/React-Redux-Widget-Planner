@@ -1,31 +1,12 @@
 const initState = {
-  widgets: [
-    {
-      id: 1,
-      widget: 'Widget A',
-      alum: 1,
-      crSteel: 1,
-      galv: 1,
-      glass: 1,
-      sSteel: 1,
-    },
-    {
-      id: 2,
-      widget: 'Widget B',
-      alum: 5,
-      crSteel: 5,
-      galv: 5,
-      glass: 5,
-      sSteel: 0,
-    },
-  ],
-  resultHistory: [
-  ],
+  widgets: [],
+  resultHistory: [],
 }
 
 function rootReducer(state = initState, action) {
 
   const { resultHistory } = state
+  const { widgets } = state
 
   // Add widget to resultHistory
   if (action.type === 'ADD_WIDGET') {
@@ -43,6 +24,28 @@ function rootReducer(state = initState, action) {
     return {
       ...state,
       resultHistory: newHistory
+    }
+  }
+
+  // Fetch all widgets from the database, put them into "widgets" state array
+  if (action.type === 'FETCH_WIDGETS') {
+    console.log('reducer', action.widget)
+
+    const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.widget
+
+    const widgetData = {
+      id: id,
+      widget: name,
+      alum: aluminum,
+      crSteel: cold_rolled_steel,
+      galv: galvanneal,
+      glass: glass,
+      sSteel: stainless_steel
+    }
+
+    return {
+      ...state,
+      widgets: [...widgets, widgetData]
     }
   }
 
