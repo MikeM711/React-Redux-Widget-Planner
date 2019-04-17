@@ -1,0 +1,11 @@
+div.widget-property-names span {
+    background: #d8d8d8;
+    display: inline-block;
+    width: 14%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-align:center;
+    border: 1px solid black;
+}

@@ -29,7 +29,7 @@ function rootReducer(state = initState, action) {
 
   // Fetch all widgets from the database, put them into "widgets" state array
   if (action.type === 'FETCH_WIDGETS') {
-    console.log('reducer', action.widget)
+    // console.log('reducer', action.widget)
 
     const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.widget
 

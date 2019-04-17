@@ -1,0 +1,11 @@
+
+div.db-widget span {
+    /* border-style: groove; */
+    background: #ededed;
+    display: inline-block;
+    width: 14%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align:center;
+    border: 1px solid black;
+}
