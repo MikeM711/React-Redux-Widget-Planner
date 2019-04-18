@@ -44,6 +44,16 @@ class Database extends Component {
       .catch((err) => console.log(err))
   }
 
+  handleDeleteWidgetDB = (id) => {
+    // delete widget in the database
+    axios.delete(`/widgetDELETE/${id}`)
+      .then((res) => {
+        // if successful, send that id to the reducer to be deleted from the redux state
+        this.props.deleteWidgetDB(id)
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
     // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
@@ -51,12 +61,14 @@ class Database extends Component {
       return (
         <DatabaseWidget
           key={widgetInfo.id}
+          id={widgetInfo.id}
           widget={widgetInfo.widget}
           alum={widgetInfo.alum}
           crSteel={widgetInfo.crSteel}
           galv={widgetInfo.galv}
           glass={widgetInfo.glass}
           sSteel={widgetInfo.sSteel}
+          DeleteWidgetDB = {this.handleDeleteWidgetDB}
         />
       )
     })
@@ -74,7 +86,7 @@ class Database extends Component {
               <span className="widget-property-name"><b>Galvanneal</b></span>
               <span className="widget-property-name"><b>Glass</b></span>
               <span className="widget-property-name"><b>Stainless Steel</b></span>
-              <a className="waves-effect waves-light btn">Edit</a>
+              <a className="waves-effect waves-light btn">Click to Edit</a>
             </div>
             {widgetList}
           </div>
@@ -96,6 +108,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addWidgetDB: (newWidget) => { dispatch({ type: 'ADD_WIDGET_TO_DB', newWidget: newWidget }) },
+    deleteWidgetDB: (deleteWidget) => { dispatch({ type: 'DELETE_WIDGET_FROM_DB', deleteWidget: deleteWidget }) },
     fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) }
   }
 }

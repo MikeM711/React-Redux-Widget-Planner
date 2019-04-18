@@ -70,6 +70,22 @@ function rootReducer(state = initState, action) {
 
   }
 
+  if (action.type === 'DELETE_WIDGET_FROM_DB') {
+
+    const deleteWidgetId = action.deleteWidget
+    console.log('delete widget', deleteWidgetId)
+
+    // Only return widgets with id's that do not match the incoming id from action
+    const newWidgetList = state.widgets.filter(widget => {
+      return deleteWidgetId !== widget.id
+    })
+
+    return {
+      ...state,
+      widgets: newWidgetList
+    }
+  }
+
   // Return new state to Redux
   return state
 }

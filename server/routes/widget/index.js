@@ -16,7 +16,6 @@ router.get('/widgets', (req, res) => {
     })
 })
 
-// Visit below URL to add a widget to DB
 router.post('/widgetPOST', (req, res) => {
 
   const { newWidget } = req.body
@@ -41,6 +40,26 @@ router.post('/widgetPOST', (req, res) => {
       // send error to the frontend
       res.status(400).json({ error });
     })
+})
+
+router.delete('/widgetDELETE/:id', (req,res) => {
+  const { id } = req.params
+
+  widget.destroy({
+    where:{
+      id
+    }
+  })
+    .then((result) => {
+      // make sure only one widget was deleted
+      if (result === 1) {
+        // end successful connection
+        res.status(200).json({ success: true });
+      }
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 })
 
 module.exports = router;
