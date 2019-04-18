@@ -1,45 +1,53 @@
-div.db-widget div {
+div.db-widget {
+    overflow: hidden;
+}
+
+div.db-widget div.widget-properties div {
     background: #ededed;
-    display: inline-block;
+    display: block;
     width: 14%;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align:center;
     border: 1px solid black;
+    float: left;
+    padding-left:1%;
+    padding-right:1%;
   }
   
-  div.db-widget a {
+  div.db-widget button {
     width: 14%;
     text-align: center;
     margin-left: 2px;
     vertical-align: center;
+    margin-top: 3px
   }
   
   @media only screen and (max-width: 750px) {
-    div.db-widget div {
+    div.db-widget div.widget-properties div {
         font-size: 10px;
     }
-    div.db-widget a {
+    div.db-widget button {
         font-size: 14px;
         height: 35px;
     }
   }
   
 @media only screen and (max-width: 700px) {
-    div.db-widget a {
+    div.db-widget button {
         font-size: 12px;
         text-align: center;
         padding: 0px;
         padding-right: 2px
     }
-    div.db-widget div {
+    div.db-widget div.widget-properties div {
         font-size: 10px;
         height: 100%;
     }
 }
 
 @media only screen and (max-width: 500px) {
-    div.db-widget a {
+    div.db-widget button {
         font-size: 10px;
         text-align: center;
         padding-right: 2px;

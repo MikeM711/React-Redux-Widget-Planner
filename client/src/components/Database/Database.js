@@ -8,6 +8,7 @@ import './Database.css'
 
 class Database extends Component {
   state = {
+    editToggleDB: false
     // widgetSelect: '',
     // qtySelect: '',
     // id: '',
@@ -54,6 +55,13 @@ class Database extends Component {
       .catch(err => console.log(err))
   }
 
+  handleeditToggleDB = () => {
+    const editToggleDB = this.state.editToggleDB
+    this.setState({
+      editToggleDB: !editToggleDB
+    })
+  }
+
   render() {
     // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
@@ -68,7 +76,8 @@ class Database extends Component {
           galv={widgetInfo.galv}
           glass={widgetInfo.glass}
           sSteel={widgetInfo.sSteel}
-          DeleteWidgetDB = {this.handleDeleteWidgetDB}
+          DeleteWidgetDB={this.handleDeleteWidgetDB}
+          isEditingDB={this.state.editToggleDB}
         />
       )
     })
@@ -86,7 +95,16 @@ class Database extends Component {
               <span className="widget-property-name"><b>Galvanneal</b></span>
               <span className="widget-property-name"><b>Glass</b></span>
               <span className="widget-property-name"><b>Stainless Steel</b></span>
-              <a className="waves-effect waves-light btn">Click to Edit</a>
+              {
+                this.state.editToggleDB ? (
+                  <a className="waves-effect waves-light btn"
+                    onClick={this.handleeditToggleDB}>Click to Delete</a>
+                ) : (
+                    <a className="waves-effect waves-light btn"
+                      onClick={this.handleeditToggleDB}>Click to Edit</a>
+                  )
+              }
+
             </div>
             {widgetList}
           </div>

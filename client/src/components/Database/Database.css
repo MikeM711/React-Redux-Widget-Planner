@@ -12,25 +12,25 @@ div.widget-property-names span {
     vertical-align:top;
   }
   
-  div.widget-property-names a {
+div.widget-property-names a {
     display: inline-block;
     width: 14%;
-    height: 60px;
+    height: 56px;
     line-height: 2;
     padding-top: 0px;
     margin-left: 2px;
-  }
+}
   
-  @media only screen and (max-width: 750px) {
+@media only screen and (max-width: 750px) {
     div.widget-property-names span {
         font-size: 10px;
         height: 60px;
     }
     div.widget-property-names a {
-        font-size: 14px;
+        font-size: 12px;
         height: 58px;
     }
-  }
+}
   
 @media only screen and (max-width: 700px) {
     div.widget-property-names a {
