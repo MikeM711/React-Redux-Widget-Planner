@@ -17,24 +17,29 @@ router.get('/widgets', (req, res) => {
 })
 
 // Visit below URL to add a widget to DB
-router.get('/widgetPOST', (req, res) => {
+router.post('/widgetPOST', (req, res) => {
 
+  const { newWidget } = req.body
   // Hard-coded widget sent to database
   const data = {
-    name: 'Widget B',
-    aluminum: 5,
-    cold_rolled_steel: 5,
-    galvanneal: 5,
-    glass: 5,
-    stainless_steel: 0
+    name: newWidget.name,
+    aluminum: newWidget.alum,
+    cold_rolled_steel: newWidget.crSteel,
+    galvanneal: newWidget.galv,
+    glass: newWidget.glass,
+    stainless_steel: newWidget.sSteel
   }
 
   widget.create(data)
     .then((widget) => {
       console.log(widget, 'successfully added')
+      // send data to the frontend
+      res.status(200).json({ data: widget.dataValues });
     })
     .catch((err) => {
       console.log(err, "widget was not successfully added to DB")
+      // send error to the frontend
+      res.status(400).json({ error });
     })
 })
 

@@ -49,6 +49,27 @@ function rootReducer(state = initState, action) {
     }
   }
 
+  if (action.type === 'ADD_WIDGET_TO_DB') {
+
+    const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.newWidget
+
+    const newWidget = {
+      id: id,
+      widget: name,
+      alum: aluminum,
+      crSteel: cold_rolled_steel,
+      galv: galvanneal,
+      glass: glass,
+      sSteel: stainless_steel
+    }
+
+    return {
+      ...state,
+      widgets: [...widgets, newWidget]
+    }
+
+  }
+
   // Return new state to Redux
   return state
 }

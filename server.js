@@ -6,7 +6,13 @@ const routes = require('./server/routes');
 
 const app = express();
 
-// const bodyParser
+const bodyParser = require('body-parser')
+
+// bodyparser
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(bodyParser.json());
 
 app.get('/introduction', (req, res) => {
   res.send('Hello World')

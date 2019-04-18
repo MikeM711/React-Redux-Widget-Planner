@@ -18,7 +18,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     aluminum: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMERIC,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -26,7 +26,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     cold_rolled_steel: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMERIC,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -34,7 +34,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     galvanneal: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMERIC,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -42,7 +42,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     glass: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMERIC,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -50,7 +50,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     stainless_steel: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.NUMERIC,
       allowNull: false,
       validate: {
         notEmpty: true,

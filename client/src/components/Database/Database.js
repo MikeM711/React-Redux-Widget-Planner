@@ -27,15 +27,27 @@ class Database extends Component {
       .catch(err => console.log(err))
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
+  handleAddWidgetToDB = (data) => {
+    console.log(data)
+    axios.post('/widgetPOST', {
+      newWidget: data
+    })
+      .then((res) => {
+        // console.log(res)
+        // When complete, add widget to the Redux State (use id given by the database)
+        const resWidget = res.data.data
 
-  // }
+        // dispatch newly created widget to redux store
+        this.props.addWidgetDB(resWidget)
+
+      })
+      .catch((err) => console.log(err))
+  }
 
   render() {
     // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
-      console.log(widgetInfo)
+      // console.log(widgetInfo)
       return (
         <DatabaseWidget
           key={widgetInfo.id}
@@ -67,7 +79,8 @@ class Database extends Component {
             {widgetList}
           </div>
         </div>
-        <AddWidget />
+        <AddWidget
+          addWidgetToDB={this.handleAddWidgetToDB} />
       </div>
     );
   }
@@ -82,7 +95,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addWidget: (widgetInfo) => { dispatch({ type: 'ADD_WIDGET_TO_DB', widgetInfo: widgetInfo }) },
+    addWidgetDB: (newWidget) => { dispatch({ type: 'ADD_WIDGET_TO_DB', newWidget: newWidget }) },
     fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) }
   }
 }
