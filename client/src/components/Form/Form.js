@@ -94,7 +94,7 @@ class Form extends Component {
             <option value=''>-- Choose A Widget --</option>
             {widgetList}
           </select>
-          <input placeholder="Number of Widgets" id="widget_quantity" type="text" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
+          <input placeholder="Number of Widgets" id="widget_quantity" type="number" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
           <br></br>
           <button className="btn waves-effect waves-light formbtn" >Calculate</button>
         </form>

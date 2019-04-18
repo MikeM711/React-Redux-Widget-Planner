@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar'
 import DatabaseWidget from '../DatabaseWidget/DatabaseWidget'
+import AddWidget from '../AddWidget/AddWidget'
 import { connect } from 'react-redux';
 import axios from 'axios'
 import './Database.css'
@@ -61,13 +62,12 @@ class Database extends Component {
               <span className="widget-property-name"><b>Galvanneal</b></span>
               <span className="widget-property-name"><b>Glass</b></span>
               <span className="widget-property-name"><b>Stainless Steel</b></span>
-              <span><b>Delete</b></span>
+              <a className="waves-effect waves-light btn">Edit</a>
             </div>
             {widgetList}
           </div>
-          
-
         </div>
+        <AddWidget />
       </div>
     );
   }

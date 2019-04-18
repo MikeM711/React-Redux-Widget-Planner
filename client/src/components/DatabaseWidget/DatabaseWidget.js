@@ -9,12 +9,13 @@ class DatabaseWidget extends Component {
 
     return (
       <div className="db-widget" >
-        <span className="db-widget-property widget">{widget}</span>
-        <span className="db-widget-property alum">{alum}</span>
-        <span className="db-widget-property crSteel">{crSteel}</span>
-        <span className="db-widget-property galv">{galv}</span>
-        <span className="db-widget-property glass">{glass}</span>
-        <span className="db-widget-property sSteel">{sSteel}</span>
+        <div className="db-widget-property widget">{widget}</div>
+        <div className="db-widget-property alum">{alum}</div>
+        <div className="db-widget-property crSteel">{crSteel}</div>
+        <div className="db-widget-property galv">{galv}</div>
+        <div className="db-widget-property glass">{glass}</div>
+        <div className="db-widget-property sSteel">{sSteel}</div>
+        <a href="" className="waves-effect waves-light btn">Delete</a>
       </div>
     );
   }

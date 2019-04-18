@@ -34,14 +34,14 @@ class SelectedWidgets extends Component {
 
       })
     ) : (
-        <p className="center text-blue">No Widgets!</p>
+        <div className="collection">
+          <p className="center text-blue">No Widgets!</p>
+        </div>
       )
     return (
       <div className="calculator-results">
         <h5 className="center green-text">Results Component</h5>
-        <div className="collection">
-          {widgetResult}
-        </div>
+        {widgetResult}
       </div>
     );
   }

@@ -1,6 +1,4 @@
-
-div.db-widget span {
-    /* border-style: groove; */
+div.db-widget div {
     background: #ededed;
     display: inline-block;
     width: 14%;
@@ -8,4 +6,51 @@ div.db-widget span {
     padding-bottom: 10px;
     text-align:center;
     border: 1px solid black;
+  }
+  
+  div.db-widget a {
+    width: 14%;
+    text-align: center;
+    margin-left: 2px;
+    vertical-align: center;
+  }
+  
+  @media only screen and (max-width: 750px) {
+    div.db-widget div {
+        font-size: 10px;
+    }
+    div.db-widget a {
+        font-size: 14px;
+        height: 35px;
+    }
+  }
+  
+@media only screen and (max-width: 700px) {
+    div.db-widget a {
+        font-size: 12px;
+        text-align: center;
+        padding: 0px;
+        padding-right: 2px
+    }
+    div.db-widget div {
+        font-size: 10px;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    div.db-widget a {
+        font-size: 10px;
+        text-align: center;
+        padding-right: 2px;
+        margin-top: 2px;
+        height: 30px;
+        text-align: center;
+        
+    }
+    div.db-widget div {
+        font-size: 8px;
+        height: 100%;
+        
+    }
 }
