@@ -85,26 +85,18 @@ class Database extends Component {
     return (
       <div className="database">
         <Navbar />
-        <div className="database-form container">
+        <div className="database-form">
           <h4 className="center red-text">Widget Database</h4>
           <div className="full-db-widget-row">
-            <div className="widget-property-names" >
-              <span className="widget-property-name"><b>Widget Name</b></span>
-              <span className="widget-property-name"><b>Aluminum</b></span>
-              <span className="widget-property-name"><b>Cold Rolled Steel</b></span>
-              <span className="widget-property-name"><b>Galvanneal</b></span>
-              <span className="widget-property-name"><b>Glass</b></span>
-              <span className="widget-property-name"><b>Stainless Steel</b></span>
-              {
-                this.state.editToggleDB ? (
-                  <a className="waves-effect waves-light btn"
-                    onClick={this.handleeditToggleDB}>Click to Delete</a>
-                ) : (
-                    <a className="waves-effect waves-light btn"
-                      onClick={this.handleeditToggleDB}>Click to Edit</a>
-                  )
-              }
-
+            <div className="widget-property-names row" >
+              <span className="widget-property-name col m8ths"><b>Edit Widget</b></span>
+              <span className="widget-property-name col m8ths"><b>Widget Name</b></span>
+              <span className="widget-property-name col m8ths"><b>Aluminum</b></span>
+              <span className="widget-property-name col m8ths"><b>Cold Rolled Steel</b></span>
+              <span className="widget-property-name col m8ths"><b>Galvanneal</b></span>
+              <span className="widget-property-name col m8ths"><b>Glass</b></span>
+              <span className="widget-property-name col m8ths"><b>Stainless Steel</b></span>
+              <span className="widget-property-name col m8ths"><b>Delete Widget</b></span>
             </div>
             {widgetList}
           </div>

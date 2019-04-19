@@ -1,64 +1,32 @@
-div.db-widget {
+
+/* Properties Row */
+div.widget-properties {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
     overflow: hidden;
+    
 }
 
-div.db-widget div.widget-properties div {
+.row .db-widget-property.col.m8ths {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    width: 12%;
+    border: 1px solid black;
     background: #ededed;
-    display: block;
-    width: 14%;
     padding-top: 10px;
     padding-bottom: 10px;
-    text-align:center;
-    border: 1px solid black;
-    float: left;
-    padding-left:1%;
-    padding-right:1%;
-  }
-  
-  div.db-widget button {
-    width: 14%;
-    text-align: center;
-    margin-left: 2px;
-    vertical-align: center;
-    margin-top: 3px
-  }
-  
-  @media only screen and (max-width: 750px) {
-    div.db-widget div.widget-properties div {
-        font-size: 10px;
-    }
-    div.db-widget button {
-        font-size: 14px;
-        height: 35px;
-    }
-  }
-  
-@media only screen and (max-width: 700px) {
-    div.db-widget button {
-        font-size: 12px;
-        text-align: center;
-        padding: 0px;
-        padding-right: 2px
-    }
-    div.db-widget div.widget-properties div {
-        font-size: 10px;
-        height: 100%;
-    }
+    padding-left: 2px;
+    padding-right: 2px;
+
 }
 
-@media only screen and (max-width: 500px) {
-    div.db-widget button {
-        font-size: 10px;
-        text-align: center;
-        padding-right: 2px;
-        margin-top: 2px;
-        height: 30px;
-        text-align: center;
-        
-    }
-    div.db-widget div {
-        font-size: 8px;
-        height: 100%;
-        
-    }
+.edit.btn.col.m8ths, .delete.btn.col.m8ths {
+    width: 12%;
+    border: 1px solid black;
+    height: inherit;
+    
 }
