@@ -8,6 +8,20 @@ function rootReducer(state = initState, action) {
   const { resultHistory } = state
   const { widgets } = state
 
+
+  // Function produces a shallow copy of Redux store widgets for updating a particular widget
+  const findAndReplace = (updatedItem, state) => {
+
+    const widgetsCopy = state.widgets.slice();
+
+    widgetsCopy.forEach((currValue, idx) => {
+      if (currValue.id === updatedItem.id) {
+        widgetsCopy.splice(idx, 1, updatedItem);
+      }
+    });
+    return widgetsCopy;
+  };
+
   // Add widget to resultHistory
   if (action.type === 'ADD_WIDGET') {
     return {
@@ -84,6 +98,26 @@ function rootReducer(state = initState, action) {
       ...state,
       widgets: newWidgetList
     }
+  }
+
+  if (action.type === 'UPDATE_WIDGET_FROM_DB') {
+
+    const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.updatedWidget
+
+    const updatedWidget = {
+      id: id,
+      widget: name,
+      alum: aluminum,
+      crSteel: cold_rolled_steel,
+      galv: galvanneal,
+      glass: glass,
+      sSteel: stainless_steel
+    }
+
+    return {
+      ...state,
+      widgets: findAndReplace(updatedWidget, state),
+    };
   }
 
   // Return new state to Redux

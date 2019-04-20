@@ -4,8 +4,7 @@ div.widget-properties {
     display: flex;
     flex-wrap: wrap;
     margin: 0px;
-    overflow: hidden;
-    
+    overflow: hidden;  
 }
 
 .row .db-widget-property.col.m8ths {
@@ -21,12 +20,26 @@ div.widget-properties {
     padding-bottom: 10px;
     padding-left: 2px;
     padding-right: 2px;
+}
 
+.edit-widget-property {
+    width: 12%;
+    background: #ededed;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .edit.btn.col.m8ths, .delete.btn.col.m8ths {
     width: 12%;
     border: 1px solid black;
-    height: inherit;
-    
+    height: inherit;  
+}
+
+div.edit-col {
+    margin-left: 10px;
+    margin-right: 10px;
 }

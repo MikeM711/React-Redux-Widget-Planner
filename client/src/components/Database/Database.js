@@ -8,7 +8,6 @@ import './Database.css'
 
 class Database extends Component {
   state = {
-    editToggleDB: false
     // widgetSelect: '',
     // qtySelect: '',
     // id: '',
@@ -55,11 +54,15 @@ class Database extends Component {
       .catch(err => console.log(err))
   }
 
-  handleeditToggleDB = () => {
-    const editToggleDB = this.state.editToggleDB
-    this.setState({
-      editToggleDB: !editToggleDB
+  handleUpdateWidgetDB = (updatedData) => {
+    axios.put('/widgetUPDATE', {
+      updatedWidget: updatedData
     })
+      .then((res) => {
+        const updatedWidget = res.data.data
+        this.props.updateWidgetDB(updatedWidget)
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -77,7 +80,7 @@ class Database extends Component {
           glass={widgetInfo.glass}
           sSteel={widgetInfo.sSteel}
           DeleteWidgetDB={this.handleDeleteWidgetDB}
-          isEditingDB={this.state.editToggleDB}
+          updateWidgetDB={this.handleUpdateWidgetDB}
         />
       )
     })
@@ -119,7 +122,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addWidgetDB: (newWidget) => { dispatch({ type: 'ADD_WIDGET_TO_DB', newWidget: newWidget }) },
     deleteWidgetDB: (deleteWidget) => { dispatch({ type: 'DELETE_WIDGET_FROM_DB', deleteWidget: deleteWidget }) },
-    fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) }
+    fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) },
+    updateWidgetDB: (updatedWidget) => { dispatch({ type: 'UPDATE_WIDGET_FROM_DB', updatedWidget: updatedWidget }) }
   }
 }
 

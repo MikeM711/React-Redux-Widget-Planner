@@ -62,4 +62,40 @@ router.delete('/widgetDELETE/:id', (req,res) => {
     });
 })
 
+router.put('/widgetUPDATE', (req,res) => {
+
+  const { id, name, alum, crSteel, galv, glass, sSteel } = req.body.updatedWidget
+
+  const updateData = {
+    name: name,
+    aluminum: alum,
+    cold_rolled_steel: crSteel,
+    galvanneal: galv,
+    glass: glass,
+    stainless_steel: sSteel
+  }
+
+  widget.update(updateData, {
+    where: {id}
+  })
+    .then(([result]) => {
+      // some security to make sure we only updated one row
+      if (result === 1) {
+        // return the widget row we have updated
+        return widget.findOne({
+          where: {id}
+        })
+      }
+    })
+    .then((data) => {
+      res.status(200).json({ data: data.dataValues });
+    })
+    .catch((err) => {
+      console.log("Error in updating the database")
+      es.status(400).json({ err });
+    })
+
+
+})
+
 module.exports = router;
