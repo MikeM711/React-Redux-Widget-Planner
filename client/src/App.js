@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import WidgetPage from './components/WidgetPage/WidgetPage'
+import { Route, BrowserRouter } from 'react-router-dom';
+
+import WidgetPage from './components/WidgetPageComponents/WidgetPage/WidgetPage'
 import Database from './components/Database/Database'
 import Profile from './components/Profile/Profile'
 import Login from './components/Login/Login'
 import Logout from './components/Logout/Logout'
-import { Route, BrowserRouter } from 'react-router-dom';
 
 class App extends Component {
 

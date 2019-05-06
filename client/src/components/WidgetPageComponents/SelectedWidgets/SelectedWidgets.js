@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { completeUserHistory } from '../../reducers/rootReducer'
-import SingleWidget from '../SingleWidget/SingleWidget'
+
+import SingleWidget from '../../SingleWidget/SingleWidget';
+import * as actions from '../../../actions';
 
 class SelectedWidgets extends Component {
 
   handleDelete = (id) => {
-    this.props.deleteWidget(id)
+    this.props.deleteWidgetHist(id)
   }
 
   render() {
-    const widgetResult = this.props.completeHistory.length ? (
-      this.props.completeHistory.map(result => {
+
+    const widgetResult = this.props.userHistory.length ? (
+      this.props.userHistory.map(result => {
 
         // Destructuring off results
         let { alum, crSteel, galv, glass, sSteel, widgetSelect, qtySelect, id } = result
@@ -38,6 +40,7 @@ class SelectedWidgets extends Component {
           <p className="center text-blue">No Widgets!</p>
         </div>
       )
+
     return (
       <div className="calculator-results">
         <h5 className="center green-text">Results Component</h5>
@@ -50,16 +53,8 @@ class SelectedWidgets extends Component {
 const mapStateToProps = (state) => {
 
   return {
-    widgets: state.widgets, // not used
-    resultHistory: state.resultHistory, // not used
-    completeHistory: completeUserHistory(state)
+    userHistory: state.widgetRed.userHistory
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteWidget: (id) => { dispatch({ type: 'DELETE_WIDGET', id: id }) }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectedWidgets);
+export default connect(mapStateToProps, actions)(SelectedWidgets);

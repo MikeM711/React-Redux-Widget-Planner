@@ -6,14 +6,16 @@ router.get('/greeting', (req, res) => {
   res.send('hello in widget route')
 })
 
-router.get('/widgets', (req, res) => {
-  widget.findAll()
-    .then((widgets) => {
-      res.status(200).json({ widgets });
-    })
-    .catch((err) => {
-      res.status(400).json({ err });
-    })
+router.get('/widgets', async (req, res) => {
+  try {
+    console.log('INSIDE /WIDGETS')
+    const allWidgets = await widget.findAll()
+    res.status(200).json({ allWidgets });
+  }
+  catch (err) {
+    console.log('error in finding widgets')
+    res.status(400).json({ err });
+  }
 })
 
 router.post('/widgetPOST', (req, res) => {

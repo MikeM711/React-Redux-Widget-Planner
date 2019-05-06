@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
+
+import * as actions from '../../../actions'
 
 class Form extends Component {
-  state = {
-    widgetSelect: '',
-    qtySelect: '',
-    id: '',
-    errorMsg: '',
+  constructor(props) {
+    super(props);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      widgetSelect: '',
+      qtySelect: '',
+      id: '',
+      errorMsg: '',
+    }
   }
 
-  componentDidMount() {
-
-    // When component mounts, display all todos from Database, by cycling through each widget
-    axios.get('/widgets')
-      .then(res => {
-        for (let i = 0; i < res.data.widgets.length; i++) {
-          // dispatch particular widget from DB to Redux
-          this.props.fetchWidgets(res.data.widgets[i]);
-        }
-      })
-      .catch(err => console.log(err))
+  async componentDidMount() {
+    await this.props.fetchWidgetsDB()
   }
 
   handleWidgetChange = (event) => {
@@ -37,7 +34,7 @@ class Form extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  async handleSubmit(event) {
     event.preventDefault();
 
     // if Widget Select is blank or QTY Select is blank, handle error
@@ -47,7 +44,7 @@ class Form extends Component {
 
     // if Widget Select and QTY select are both filled
     if (this.state.widgetSelect && this.state.qtySelect) {
-      this.props.addWidget(this.state)
+      await this.props.addWidgetHist(this.state)
       this.setState({
         widgetSelect: '',
         qtySelect: '',
@@ -105,16 +102,8 @@ class Form extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    widgets: state.widgets,
-    state: state, // to keep tabs on Redux Store
+    widgets: state.widgetRed.widgets,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addWidget: (widgetInfo) => { dispatch({ type: 'ADD_WIDGET', widgetInfo: widgetInfo }) },
-    fetchWidgets: (widget) => { dispatch({ type: 'FETCH_WIDGETS', widget: widget }) }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, actions)(Form);
