@@ -1,68 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios'
+
+import './Database.css'
 import Navbar from '../Navbar/Navbar'
 import DatabaseWidget from '../DatabaseWidget/DatabaseWidget'
 import AddWidget from '../AddWidget/AddWidget'
-import { connect } from 'react-redux';
-import axios from 'axios'
-import './Database.css'
+import * as actions from '../../actions'
 
 class Database extends Component {
-  state = {
-    // widgetSelect: '',
-    // qtySelect: '',
-    // id: '',
-    // errorMsg: '',
+
+  constructor(props){
+    super(props);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleAddWidgetToDB = this.handleAddWidgetToDB.bind(this);
+    this.handleDeleteWidgetDB = this.handleDeleteWidgetDB.bind(this);
   }
 
-  componentDidMount() {
-
-    // When component mounts, display all todos from Database, by cycling through each widget
-    axios.get('/widgets')
-      .then(res => {
-        for (let i = 0; i < res.data.widgets.length; i++) {
-          // dispatch particular widget from DB to Redux
-          this.props.fetchWidgets(res.data.widgets[i]);
-        }
-      })
-      .catch(err => console.log(err))
+  async componentDidMount() {
+    if (!this.props.widgets.length) {
+      await this.props.fetchWidgetsDB()
+    }
   }
 
-  handleAddWidgetToDB = (data) => {
+  async handleAddWidgetToDB(data) {
     console.log(data)
-    axios.post('/widgetPOST', {
-      newWidget: data
-    })
-      .then((res) => {
-        // console.log(res)
-        // When complete, add widget to the Redux State (use id given by the database)
-        const resWidget = res.data.data
-
-        // dispatch newly created widget to redux store
-        this.props.addWidgetDB(resWidget)
-
-      })
-      .catch((err) => console.log(err))
+    this.props.addWidgetDB(data)
   }
 
-  handleDeleteWidgetDB = (id) => {
+  async handleDeleteWidgetDB(id) {
     // delete widget in the database
-    axios.delete(`/widgetDELETE/${id}`)
-      .then((res) => {
-        // if successful, send that id to the reducer to be deleted from the redux state
-        this.props.deleteWidgetDB(id)
-      })
-      .catch(err => console.log(err))
-  }
-
-  handleUpdateWidgetDB = (updatedData) => {
-    axios.put('/widgetUPDATE', {
-      updatedWidget: updatedData
-    })
-      .then((res) => {
-        const updatedWidget = res.data.data
-        this.props.updateWidgetDB(updatedWidget)
-      })
-      .catch(err => console.log(err))
+    await this.props.deleteWidgetDB(id)
   }
 
   render() {
@@ -105,7 +73,8 @@ class Database extends Component {
           </div>
         </div>
         <AddWidget
-          addWidgetToDB={this.handleAddWidgetToDB} />
+          addWidgetToDB={this.handleAddWidgetToDB} 
+          />
       </div>
     );
   }
@@ -113,8 +82,7 @@ class Database extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    widgets: state.widgets,
-    state: state, // to keep tabs on Redux Store
+    widgets: state.widgetRed.widgets
   }
 }
 
@@ -127,4 +95,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Database);
+export default connect(mapStateToProps, actions)(Database);

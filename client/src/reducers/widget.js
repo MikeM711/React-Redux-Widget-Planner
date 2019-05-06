@@ -1,5 +1,7 @@
 import {
   FETCH_WIDGETS_DB,
+  ADD_WIDGET_DB,
+  DELETE_WIDGET_DB,
   ADD_WIDGET_USER_HISTORY,
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY
@@ -16,6 +18,19 @@ function widgetReducer(state = initState, action) {
     case FETCH_WIDGETS_DB:
       // console.log('[WidgetReducer] got a FETCH_WIDGETS_DB action')
       return { ...state, widgets: [...state.widgets, action.payload] }
+    case ADD_WIDGET_DB:
+      console.log('[WidgetReducer] got a ADD_WIDGET_DB action')
+      return {...state, widgets: [...state.widgets, action.payload] }
+    case DELETE_WIDGET_DB:
+      console.log('[WidgetReducer] got a DELETE_WIDGET_DB action')
+      console.log('action.payload', action.payload)
+
+      const filterWidgets = deleteWgtDB(action.payload,state)
+
+      return {...state, widgets: filterWidgets}
+
+
+
     case ADD_WIDGET_USER_HISTORY:
       console.log('[WidgetReducer] got a ADD_WIDGET_USER_HISTORY action')
       const newWidget = addWidget(action.payload, state)
@@ -30,6 +45,13 @@ function widgetReducer(state = initState, action) {
     default:
       return state
   }
+}
+
+const deleteWgtDB = (id, state) => {
+  const newWidgetList = state.widgets.filter(widget => {
+    return id !== widget.id
+  })
+  return newWidgetList
 }
 
 const wgtHistTotal = (userHistory) => {

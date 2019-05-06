@@ -17,7 +17,9 @@ class Form extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchWidgetsDB()
+    if(!this.props.widgets.length){
+      await this.props.fetchWidgetsDB()
+    }
   }
 
   handleWidgetChange = (event) => {
