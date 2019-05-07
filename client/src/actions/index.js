@@ -3,6 +3,7 @@ import {
   FETCH_WIDGETS_DB,
   ADD_WIDGET_DB,
   DELETE_WIDGET_DB,
+  UPDATE_WIDGET_DB,
   ADD_WIDGET_USER_HISTORY,
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY,
@@ -82,7 +83,7 @@ export const addWidgetDB = data => {
 export const deleteWidgetDB = id => {
   return async dispatch => {
     try {
-      const res = await axios.delete(`/widget/widgetDELETE/${id}`)
+      await axios.delete(`/widget/widgetDELETE/${id}`)
 
       dispatch({
         type: DELETE_WIDGET_DB,
@@ -93,6 +94,36 @@ export const deleteWidgetDB = id => {
     catch(err) {
       console.log(err)
 
+    }
+  }
+}
+
+export const updateWidgetDB = data => {
+  return async dispatch => {
+    try {
+
+      const updatedWidget = await axios.put('widget/widgetUPDATE', {updatedWidget: data})
+
+      const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = updatedWidget.data.data
+
+      const newWidget = {
+        id: id,
+        widget: name,
+        alum: aluminum,
+        crSteel: cold_rolled_steel,
+        galv: galvanneal,
+        glass: glass,
+        sSteel: stainless_steel
+      }
+
+      dispatch({
+        type: UPDATE_WIDGET_DB,
+        payload: newWidget
+      })
+
+    }
+    catch(err) {
+      console.log(err)
     }
   }
 }
@@ -123,7 +154,6 @@ export const addWidgetHist = data => {
 export const deleteWidgetHist = id => {
   return async dispatch => {
     try {
-      console.log('id', id)
 
       dispatch({
         type: DELETE_WIDGET_USER_HISTORY,

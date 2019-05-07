@@ -2,6 +2,7 @@ import {
   FETCH_WIDGETS_DB,
   ADD_WIDGET_DB,
   DELETE_WIDGET_DB,
+  UPDATE_WIDGET_DB,
   ADD_WIDGET_USER_HISTORY,
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY
@@ -16,21 +17,21 @@ const initState = {
 function widgetReducer(state = initState, action) {
   switch (action.type) {
     case FETCH_WIDGETS_DB:
-      // console.log('[WidgetReducer] got a FETCH_WIDGETS_DB action')
+      console.log('[WidgetReducer] got a FETCH_WIDGETS_DB action')
       return { ...state, widgets: [...state.widgets, action.payload] }
     case ADD_WIDGET_DB:
       console.log('[WidgetReducer] got a ADD_WIDGET_DB action')
       return {...state, widgets: [...state.widgets, action.payload] }
     case DELETE_WIDGET_DB:
       console.log('[WidgetReducer] got a DELETE_WIDGET_DB action')
-      console.log('action.payload', action.payload)
-
       const filterWidgets = deleteWgtDB(action.payload,state)
-
       return {...state, widgets: filterWidgets}
-
-
-
+    case UPDATE_WIDGET_DB:
+      console.log('[WidgetReducer] got a UPDATE_WIDGET_DB action')
+      console.log('action.payload',action.payload)
+      const updatedWidgets = findAndReplace(action.payload,state)
+      console.log(updatedWidgets)
+      return {...state, widgets: updatedWidgets}
     case ADD_WIDGET_USER_HISTORY:
       console.log('[WidgetReducer] got a ADD_WIDGET_USER_HISTORY action')
       const newWidget = addWidget(action.payload, state)
@@ -46,6 +47,19 @@ function widgetReducer(state = initState, action) {
       return state
   }
 }
+
+const findAndReplace = (updatedItem, state) => {
+
+  const widgetsCopy = state.widgets.slice();
+
+  widgetsCopy.forEach((currValue, idx) => {
+    if (currValue.id === updatedItem.id) {
+      widgetsCopy.splice(idx, 1, updatedItem);
+    }
+  });
+
+  return widgetsCopy;
+};
 
 const deleteWgtDB = (id, state) => {
   const newWidgetList = state.widgets.filter(widget => {
@@ -117,137 +131,3 @@ const addWidget = (payload, state) => {
 }
 
 export default widgetReducer
-
-
-
-  /*
-
-
-const { userHistory } = state
-const { widgets } = state
-
-
-// Function produces a shallow copy of Redux store widgets for updating a particular widget
-const findAndReplace = (updatedItem, state) => {
-
-  const widgetsCopy = state.widgets.slice();
-
-  widgetsCopy.forEach((currValue, idx) => {
-    if (currValue.id === updatedItem.id) {
-      widgetsCopy.splice(idx, 1, updatedItem);
-    }
-  });
-  return widgetsCopy;
-};
-
-// Add widget to userHistory
-if (action.type === 'ADD_WIDGET') {
-  return {
-    ...state,
-    userHistory: [...userHistory, action.widgetInfo]
-  }
-}
-
-// Delete widget from userHistory
-if (action.type === 'DELETE_WIDGET') {
-  const newHistory = userHistory.filter(widgetInfo => {
-    return widgetInfo.id !== action.id
-  })
-  return {
-    ...state,
-    userHistory: newHistory
-  }
-}
-
-// Fetch all widgets from the database, put them into "widgets" state array
-if (action.type === 'FETCH_WIDGETS_DB') {
-  // console.log('reducer', action.widget)
-
-
-
-
-
-
-
-  const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.widget
-
-  const widgetData = {
-    id: id,
-    widget: name,
-    alum: aluminum,
-    crSteel: cold_rolled_steel,
-    galv: galvanneal,
-    glass: glass,
-    sSteel: stainless_steel
-  }
-
-  return {
-    ...state,
-    widgets: [...widgets, widgetData]
-  }
-}
-
-if (action.type === 'ADD_WIDGET_TO_DB') {
-
-  const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.newWidget
-
-  const newWidget = {
-    id: id,
-    widget: name,
-    alum: aluminum,
-    crSteel: cold_rolled_steel,
-    galv: galvanneal,
-    glass: glass,
-    sSteel: stainless_steel
-  }
-
-  return {
-    ...state,
-    widgets: [...widgets, newWidget]
-  }
-
-}
-
-if (action.type === 'DELETE_WIDGET_FROM_DB') {
-
-  const deleteWidgetId = action.deleteWidget
-  console.log('delete widget', deleteWidgetId)
-
-  // Only return widgets with id's that do not match the incoming id from action
-  const newWidgetList = state.widgets.filter(widget => {
-    return deleteWidgetId !== widget.id
-  })
-
-  return {
-    ...state,
-    widgets: newWidgetList
-  }
-}
-
-if (action.type === 'UPDATE_WIDGET_FROM_DB') {
-
-  const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = action.updatedWidget
-
-  const updatedWidget = {
-    id: id,
-    widget: name,
-    alum: aluminum,
-    crSteel: cold_rolled_steel,
-    galv: galvanneal,
-    glass: glass,
-    sSteel: stainless_steel
-  }
-
-  return {
-    ...state,
-    widgets: findAndReplace(updatedWidget, state),
-  };
-}
-  // Return new state to Redux
-return state
-
-*/
-
-
-
-

@@ -1,6 +1,6 @@
-div.add-widget-row div.input-field input {
+div.add-widget-row2 , div.add-widget-row1 {
   padding-top: 0px;
-  margin-top: 0px
+  margin: 0px;
 }
 
 input.add-widget-submit-btn {

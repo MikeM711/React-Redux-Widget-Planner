@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { GoogleLogout } from 'react-google-login';
 
-class Logout extends Component {
+class SignOut extends Component {
 
   render() {
 
@@ -10,7 +10,7 @@ class Logout extends Component {
       <div className="login">
         <Navbar />
         <div className="login-container container">
-          <h3>SignOut</h3>
+          <h3>Sign Out</h3>
 
         </div>
       </div>
@@ -18,4 +18,4 @@ class Logout extends Component {
   }
 }
 
-export default Logout;
+export default SignOut;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './DatabaseWidget.css'
 
 class DatabaseWidget extends Component {
@@ -85,7 +86,7 @@ class DatabaseWidget extends Component {
   render() {
 
     // Widget properties
-    const { widget, alum, crSteel, galv, glass, sSteel, id } = this.props
+    const { widget, alum, crSteel, galv, glass, sSteel } = this.props
 
     const { editToggleWidget } = this.state
 

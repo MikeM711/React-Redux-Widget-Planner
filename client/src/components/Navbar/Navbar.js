@@ -10,8 +10,9 @@ class Navbar extends Component {
 					<div className="nav-wrapper row">
 						<Link to="/" className="brand-logo home-nav-link col left">Calculator</Link>
 						<ul id="nav-mobile" className="right">
-							<li><Link to="/login">Login</Link></li>
-							<li><Link to="/logout">Logout</Link></li>
+							<li><Link to="/signin">Sign In</Link></li>
+							<li><Link to="/signup">Sign Up</Link></li>
+							<li><Link to="/signout">Sign Out</Link></li>
 							<li><Link to="/profile">Profile</Link></li>
               <li><Link to="/database">Database</Link></li>
 						</ul>

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SingleWidget from '../../SingleWidget/SingleWidget';
+import SingleWidget from '../SingleWidget/SingleWidget';
 import * as actions from '../../../actions';
 
 class SelectedWidgets extends Component {
+  constructor(props){
+    super(props);
+    this.handleDelete = this.handleDelete.bind(this)
+  }
 
-  handleDelete = (id) => {
-    this.props.deleteWidgetHist(id)
+  async handleDelete(id) {
+    await this.props.deleteWidgetHist(id)
   }
 
   render() {

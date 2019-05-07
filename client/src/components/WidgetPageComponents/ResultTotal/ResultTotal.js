@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { completeUserHistory } from '../../reducers'
 
 class ResultTotal extends Component {
 
