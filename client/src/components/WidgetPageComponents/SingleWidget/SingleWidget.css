@@ -12,4 +12,9 @@ td.delete-button-img img{
 
 img:hover { 
   opacity: 0.3;
+  cursor: pointer
+}
+
+span.Collapsible__trigger:hover {
+  cursor: pointer
 }

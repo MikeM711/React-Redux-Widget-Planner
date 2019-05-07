@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './SelectedWidgets.css';
 import SingleWidget from '../SingleWidget/SingleWidget';
 import * as actions from '../../../actions';
 

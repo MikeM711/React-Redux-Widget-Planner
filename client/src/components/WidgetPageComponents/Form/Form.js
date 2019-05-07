@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './Form.css'
 import * as actions from '../../../actions'
 
 class Form extends Component {
@@ -80,7 +81,7 @@ class Form extends Component {
     // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
       return (
-        <option value={widgetInfo.widget} key={widgetInfo.id}>{widgetInfo.widget}</option>
+        <option className="widget-dropdown-menu-options" value={widgetInfo.widget} key={widgetInfo.id}>{widgetInfo.widget}</option>
       )
     })
 
@@ -90,9 +91,9 @@ class Form extends Component {
         <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col s8 offset-s2">
+            {/* <div className="col s8 offset-s2"> */}
 
-              <select className="browser-default" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
+              <select className="browser-default widget-dropdown-menu" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
                 <option value=''>-- Choose A Widget --</option>
                 {widgetList}
               </select>
@@ -100,7 +101,7 @@ class Form extends Component {
               <br></br>
               <button className="btn waves-effect waves-light formbtn" >Calculate</button>
               
-            </div>
+            {/* </div> */}
           </div>
         </form>
       </div>

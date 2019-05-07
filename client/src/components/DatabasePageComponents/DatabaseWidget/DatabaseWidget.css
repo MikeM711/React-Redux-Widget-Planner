@@ -3,8 +3,10 @@
 div.widget-properties {
     display: flex;
     flex-wrap: wrap;
-    margin: 0px;
-    overflow: hidden;  
+    margin: auto;
+    overflow: hidden;
+    padding-left: 2.5%;
+    max-width: 1200px
 }
 
 .row .db-widget-property.col.m8ths {
@@ -37,6 +39,12 @@ div.widget-properties {
     width: 12%;
     border: 1px solid black;
     height: inherit;  
+    transition: all 0.2s ease-in-out;
+}
+
+.edit.btn.col.m8ths:hover, .delete.btn.col.m8ths:hover { 
+    opacity: 0.75;
+    padding-left: 3%
 }
 
 div.edit-col {

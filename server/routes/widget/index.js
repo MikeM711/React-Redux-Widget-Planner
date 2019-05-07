@@ -2,10 +2,6 @@ const express = require('express');
 const { widget } = require('../../models')
 const router = express.Router();
 
-router.get('/greeting', (req, res) => {
-  res.send('hello in widget route')
-})
-
 router.get('/widgets', async (req, res) => {
   try {
     console.log('INSIDE /WIDGETS')
@@ -96,7 +92,6 @@ router.put('/widgetUPDATE', (req,res) => {
       console.log("Error in updating the database")
       es.status(400).json({ err });
     })
-
 
 })
 

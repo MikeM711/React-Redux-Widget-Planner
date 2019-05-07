@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './ResultTotal.css'
+
 class ResultTotal extends Component {
 
   render() {

@@ -99,7 +99,7 @@ class SignUp extends Component {
                   <label className={isWritingPassword} htmlFor="password">Password</label>
                 </div>
                 <div className="col">
-                  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2 formbtn" >Sign Up</button>
+                  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2 sign-up-btn" >Sign Up</button>
 
                 </div>
               </form>

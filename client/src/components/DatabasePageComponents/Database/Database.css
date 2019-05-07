@@ -6,7 +6,9 @@ div.database-form {
 div.widget-property-names {
     display: flex;
     flex-wrap: wrap;
-    margin: 0px;
+    margin: auto;
+    padding-left: 2.5%;
+    max-width: 1200px
 }
 
 .widget-property-names.row .col.m8ths {
