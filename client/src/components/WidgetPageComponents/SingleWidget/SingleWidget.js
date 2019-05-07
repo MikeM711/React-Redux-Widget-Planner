@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
 
+import './SingleWidget.css'
+import deleteButton from '../../../images/delete-button.png'
+
 class SingleWidget extends Component {
 
   render() {
@@ -24,8 +27,13 @@ class SingleWidget extends Component {
                   <p className="center">{sSteel} | Stainless Steel</p>
                 </Collapsible>
               </td>
-              <td className="delete-button">
-                <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => { handleDelete(id) }}>X</button>
+              <td className="delete-button-img">
+                {/* <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => { handleDelete(id) }}>X</button> */}
+                <img 
+                  src={deleteButton} 
+                  alt="delete-button"
+                  onClick={() => { handleDelete(id) }}
+                  />
               </td>
             </tr>
           </tbody>

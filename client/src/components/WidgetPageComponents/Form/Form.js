@@ -17,7 +17,7 @@ class Form extends Component {
   }
 
   async componentDidMount() {
-    if(!this.props.widgets.length){
+    if (!this.props.widgets.length) {
       await this.props.fetchWidgetsDB()
     }
   }
@@ -89,13 +89,19 @@ class Form extends Component {
         <h5 className="center red-text">Form Component</h5>
         <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
-          <select className="browser-default" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
-            <option value=''>-- Choose A Widget --</option>
-            {widgetList}
-          </select>
-          <input placeholder="Number of Widgets" id="widget_quantity" type="number" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
-          <br></br>
-          <button className="btn waves-effect waves-light formbtn" >Calculate</button>
+          <div className="row">
+            <div className="col s8 offset-s2">
+
+              <select className="browser-default" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
+                <option value=''>-- Choose A Widget --</option>
+                {widgetList}
+              </select>
+              <input placeholder="Number of Widgets" id="widget_quantity" type="number" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
+              <br></br>
+              <button className="btn waves-effect waves-light formbtn" >Calculate</button>
+              
+            </div>
+          </div>
         </form>
       </div>
     );

@@ -1,0 +1,15 @@
+td.delete-button-img{
+  vertical-align: top;
+  padding-top: 20px
+}
+
+td.delete-button-img img{
+      width:30px; /* you can use % */
+      height: auto;
+      vertical-align: top;
+      transition: all 0.1s ease-in-out;
+}
+
+img:hover { 
+  opacity: 0.3;
+}

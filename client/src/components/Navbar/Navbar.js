@@ -7,8 +7,8 @@ class Navbar extends Component {
 		return (
 			<div>
 				<nav>
-					<div className="nav-wrapper row">
-						<Link to="/" className="brand-logo home-nav-link col left">Calculator</Link>
+					<div className="nav-wrapper #424242 grey darken-3 row">
+						<Link to="/" className="brand-logo home-nav-link col left">Widget Calculator</Link>
 						<ul id="nav-mobile" className="right">
 							<li><Link to="/signin">Sign In</Link></li>
 							<li><Link to="/signup">Sign Up</Link></li>
