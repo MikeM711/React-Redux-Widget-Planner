@@ -7,7 +7,72 @@ import {
   ADD_WIDGET_USER_HISTORY,
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY,
+  AUTH_SIGN_UP,
+  AUTH_ERROR
   } from './types';
+
+
+// Google actionCreator
+export const oauthGoogle = data => {
+  return async dispatch => {
+    console.log('we received', data)
+    const res = await axios.post('/auth/oauth/google', {
+      access_token: data
+    });
+
+    console.log('res', res)
+
+    dispatch({
+      type: AUTH_SIGN_UP,
+      payload: res.data.token
+    });
+
+    localStorage.setItem('JWT_TOKEN', res.data.token);
+    axios.defaults.headers.common['Authorization'] = res.data.token;
+  };
+}
+
+// User Sign Up actionCreator
+export const signUp = (data) => {
+  return async dispatch => {
+    try {
+      console.log('[ActionCreator] signUp called')
+      const res = await axios.post('/auth/signup', data)
+
+      console.log('res', res);
+      console.log('[ActionCreator] signUp dispatched an action')
+
+      dispatch({
+        type: AUTH_SIGN_UP,
+        payload: res.data.token,
+      });
+
+      localStorage.setItem('JWT_TOKEN', res.data.token);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
+    }
+    catch(err) {
+      console.log('[ActionCreator] signUp dispatched a failed action')
+
+      console.log(err.response)
+
+      if(err.response.data.details){
+        var signUpErr = err.response.data.details[0].message
+      } else if(err.response.data.clientErr) {
+        signUpErr = err.response.data.clientErr
+      } else if(err.response.data.error) {
+        signUpErr = err.response.data.error
+      } else {
+        // If I missed any errors to handle:
+        signUpErr = "Unauthorized - Please Handle"
+      }
+      
+      dispatch ({
+        type: AUTH_ERROR,
+        payload: signUpErr
+      });
+    }
+  }
+}
 
 // fetchWidgets actionCreator
 export const fetchWidgetsDB = data => {

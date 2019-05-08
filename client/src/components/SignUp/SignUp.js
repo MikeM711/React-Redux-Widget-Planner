@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './SignUp.css'
+import * as actions from '../../actions'
 import Navbar from '../Navbar/Navbar'
 import GoogleLogin from 'react-google-login';
 
 class SignUp extends Component {
-  state = {
-    isWritingEmail: 'inactive',
-    isWritingPassword: 'inactive',
-    email: '',
-    password: '',
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
+    this.state = {
+      isWritingEmail: 'inactive',
+      isWritingPassword: 'inactive',
+      email: '',
+      password: '',
+    }
+  }
+ 
+  async handleSubmit(event) {
+    event.preventDefault()
+    const data = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    await this.props.signUp(data)
   }
 
   handleEmailChange = (event) => {
@@ -52,22 +68,17 @@ class SignUp extends Component {
     }
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('email', this.state.email)
-    console.log('password', this.state.password)
+  async responseGoogle(res) {
+    console.log('responseGoogle', res);
+    await this.props.oauthGoogle(res.accessToken)
+    if (!this.props.errorMessage) {
+      this.props.history.push('/');
+    }
   }
 
   render() {
     const { isWritingEmail, isWritingPassword } = this.state
-
-    const responseGoogle = (response) => {
-      console.log(response);
-      console.log(response.profileObj.givenName)
-      this.setState({
-        googleName: response.profileObj.name
-      })
-    }
+    console.log('Are you authenticated?', this.props.isAuthenticated)
 
     return (
       <div className="sign-up">
@@ -115,8 +126,9 @@ class SignUp extends Component {
               <div className="login-container center">
                 <GoogleLogin
                   clientId={'920654343788-ngguegn79nillrufq91h5d4vjoth4e5t.apps.googleusercontent.com'}
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                  cookiePolicy={'single_host_origin'}
                 >
                   <span>Google Sign Up</span>
                 </GoogleLogin>
@@ -132,4 +144,11 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.authRed.errorMessage,
+    isAuthenticated: state.authRed.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, actions)(SignUp);

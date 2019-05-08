@@ -6,3 +6,6 @@ export const FETCH_WIDGETS_DB = 'FETCH_WIDGETS_DB';
 export const ADD_WIDGET_DB = 'ADD_WIDGET_DB';
 export const DELETE_WIDGET_DB = 'DELETE_WIDGET_DB';
 export const UPDATE_WIDGET_DB = 'UPDATE_WIDGET_DB';
+
+export const AUTH_SIGN_UP = 'AUTH_SIGN_UP';
+export const AUTH_ERROR = 'AUTH_ERROR';
