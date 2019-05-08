@@ -1,49 +1,57 @@
-// 12.11 Google Authentication Model
-/* Just like all other models - Models represent a collection
-    We can use this model to interact with the collection to do stuff like:
-        save recoreds, retrieve records, update them 
-
-*/
-
 module.exports = function (sequelize, Sequelize) {
-    
-  const UserExport = sequelize.define('user', {
+  
+    const UserExport = sequelize.define('user', {
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER
+        },
 
-      id: {
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-      },
+        // Optional for myself:
+        method: {
+            type: Sequelize.ENUM('local', 'google'),
+            allowNull: false,
+        },
 
-      username: {
-          type: Sequelize.STRING,
-          allowNull: false,
-      },
+        googleId: {
+            type: Sequelize.STRING,
+        },
 
-      googleId: {
-          type: Sequelize.STRING,
-          allowNull: false,
-      },
+        googleEmail: {
+            type: Sequelize.STRING,
+            validate: { 
+                isLowercase: true,
+                isEmail: true,
+            }
+        },
+   
+        email: {
+            type: Sequelize.STRING,
+            // allowNull: false,
+            // Above is commented out because a user may sign in with OAuth
+            // All incoming emails will be converted to lowercase, before sent to database
+            validate: { 
+                isLowercase: true,
+                isEmail: true,
+            }
+        },
+   
+        password: {
+            type: Sequelize.STRING,
+            // allowNull: false,
+            // Above is commented out because a user may sign in with OAuth
 
-      // If we want to use the field below, not mandatory
-      last_login: {
-          type: Sequelize.DATE
-      },
-
-      // If we want to use the field below, not mandatory
-      status: {
-          type: Sequelize.ENUM('active', 'inactive'),
-          defaultValue: 'active'
-      }
-
-      })
-
-      // Future: make a widget calculation model that you can save and dsiplay on your profile
-      
-      // UserExport.associate = (models) => {
-      //   UserExport.hasMany(models.widgetCalculation, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-      // }
-
-  return UserExport;
-
-}
+        },
+   
+        })
+   
+        // Future: make a widget calculation model that you can save and display on your profile
+       
+        // UserExport.associate = (models) => {
+        //   UserExport.hasMany(models.widgetCalculation, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+        // }
+   
+    return UserExport;
+   
+   }
+   

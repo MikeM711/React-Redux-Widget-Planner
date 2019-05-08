@@ -77,6 +77,7 @@ class SignUp extends Component {
             <div className="local-sign-up col s6">
 
               <form className="col s12" onSubmit={this.handleSubmit}>
+
                 <div className="input-field col s10">
                   <input
                     id="email"
@@ -98,10 +99,11 @@ class SignUp extends Component {
                     onBlur={this.handlePasswordBlur} />
                   <label className={isWritingPassword} htmlFor="password">Password</label>
                 </div>
-                <div className="col">
-                  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2 sign-up-btn" >Sign Up</button>
 
+                <div className="btn-field col s10">
+                  <button className="btn waves-effect waves-light #64b5f6 blue lighten-2 sign-up-btn" >Sign Up</button>
                 </div>
+
               </form>
 
             </div>

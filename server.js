@@ -61,8 +61,6 @@ app.get('/logout', (req, res) => {
 
 app.use('/', routes);
 
-require('./server/config/passport/passport.js')(passport, models.user);
-
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, (err) => {
