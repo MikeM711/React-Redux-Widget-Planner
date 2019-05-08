@@ -21,11 +21,20 @@ class Navbar extends Component {
 					<div className="nav-wrapper widget-navbar #424242 grey darken-3 row">
 						<Link to="/" className="brand-logo home-nav-link col left">Widget Calculator</Link>
 						<ul id="nav-mobile" className="right">
-							<li><Link to="/signin">Sign In</Link></li>
-							<li><Link to="/signup">Sign Up</Link></li>
-							<li><Link to="/signout" onClick={this.signOut}>Sign Out</Link></li>
-							<li><Link to="/profile">Profile</Link></li>
-              <li><Link to="/database">Database</Link></li>
+
+							{!this.props.isAuth ? 
+								([<li key="signin"><Link to="/signin">Sign In</Link></li>,
+									<li key="signup"><Link to="/signup">Sign Up</Link></li>
+								]) : null
+							}
+
+							{this.props.isAuth ?
+								([<li key="signout"><Link to="/signout" onClick={this.signOut}>Sign Out</Link></li>,
+									<li key="profile"><Link to="/profile">Profile</Link></li>,
+              		<li key="database"><Link to="/database">Database</Link></li>
+								]) : null
+							}
+
 						</ul>
 					</div>
 				</nav>
@@ -34,4 +43,10 @@ class Navbar extends Component {
 	}
 }
 
-export default connect(null, actions)(Navbar)
+function mapStateToProps(state) {
+  return {
+    isAuth: state.authRed.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, actions)(Navbar)

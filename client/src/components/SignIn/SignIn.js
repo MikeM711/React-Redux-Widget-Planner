@@ -21,6 +21,9 @@ class SignIn extends Component {
   }
 
   async componentDidMount(){
+    if(this.props.token && this.props.isAuthenticated){
+      this.props.history.push('/')
+    }
     // Erase error messages if component mounted
     await this.props.componentMount();
   }
@@ -163,7 +166,8 @@ class SignIn extends Component {
 function mapStateToProps(state) {
   return {
     errorMessage: state.authRed.errorMessage,
-    isAuthenticated: state.authRed.isAuthenticated
+    isAuthenticated: state.authRed.isAuthenticated,
+    token: state.authRed.token
   }
 }
 
