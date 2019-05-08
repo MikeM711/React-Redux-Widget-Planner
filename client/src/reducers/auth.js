@@ -1,6 +1,7 @@
 import {
   AUTH_SIGN_UP,
   AUTH_SIGN_IN,
+  AUTH_SIGN_OUT,
   AUTH_ERROR,
   COMPONENT_MOUNT,
 } from '../actions/types'
@@ -22,6 +23,9 @@ function authReducer(state = initState, action) {
     case AUTH_SIGN_IN:
       console.log('[AuthReducer] got an AUTH_SIGN_IN action')
       return { ...state, token: action.payload, isAuthenticated: true, errorMessage: '' }
+    case AUTH_SIGN_OUT:
+      console.log('[AuthReducer] got an AUTH_SIGN_OUT action')
+      return { ...state, token: action.payload, isAuthenticated: false, errorMessage: ''}
     case AUTH_ERROR:
       console.log('[AuthReducer] got an AUTH_ERROR action')
       return { ...state, errorMessage: action.payload }

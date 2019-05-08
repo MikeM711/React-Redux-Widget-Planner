@@ -9,6 +9,7 @@ import {
   CALCULATE_USER_HISTORY,
   AUTH_SIGN_UP,
   AUTH_SIGN_IN,
+  AUTH_SIGN_OUT,
   AUTH_ERROR,
   COMPONENT_MOUNT,
   } from './types';
@@ -143,6 +144,18 @@ export const signIn = (data) => {
       });
     }
   }
+}
+
+export const signOut = () => {
+  return dispatch => {
+    localStorage.removeItem('JWT_TOKEN');
+    axios.defaults.headers.common['Authorization'] = '';
+
+    dispatch({
+      type: AUTH_SIGN_OUT,
+      payload: '',
+    })
+  };
 }
 
 

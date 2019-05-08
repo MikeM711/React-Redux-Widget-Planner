@@ -1,18 +1,18 @@
-
+const passport = require('passport')
 const router = require('express-promise-router')()
 
 const WidgetsController = require('../../controllers/widgets')
 
 router.route('/widgets')
-  .get(WidgetsController.getWidgets);
+  .get(passport.authenticate('jwt', { session: false }), WidgetsController.getWidgets);
 
 router.route('/widgetPOST')
-  .post(WidgetsController.addWidget)
+  .post(passport.authenticate('jwt', { session: false }), WidgetsController.addWidget)
 
 router.route('/widgetDELETE/:id')
-  .delete(WidgetsController.deleteWidget)
+  .delete(passport.authenticate('jwt', { session: false }), WidgetsController.deleteWidget)
 
 router.route('/widgetUPDATE')
-  .put(WidgetsController.updateWidget)
+  .put(passport.authenticate('jwt', { session: false }), WidgetsController.updateWidget)
 
 module.exports = router;
