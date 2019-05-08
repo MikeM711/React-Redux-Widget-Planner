@@ -1,0 +1,14 @@
+div.sign-up-container {
+  margin-top: 20px;
+}
+
+div.sign-up-container .sign-up .card-panel{
+  background: red;
+  padding-top:10px;
+  padding-bottom:15px;
+  box-shadow: none;
+}
+
+button.sign-up-btn:hover{
+  opacity:0.75;
+}

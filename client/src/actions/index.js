@@ -8,7 +8,9 @@ import {
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY,
   AUTH_SIGN_UP,
-  AUTH_ERROR
+  AUTH_SIGN_IN,
+  AUTH_ERROR,
+  COMPONENT_MOUNT,
   } from './types';
 
 
@@ -57,10 +59,23 @@ export const signUp = (data) => {
 
       if(err.response.data.details){
         var signUpErr = err.response.data.details[0].message
+        console.log('signUpErr',signUpErr)
+        // console.log('true or false', signInErr === '"email" is not allowed to be empty')
+        switch(signUpErr) {
+          case '"email" is not allowed to be empty':
+            signUpErr = 'Please fill out the "email" field'
+            break
+          case '"password" is not allowed to be empty':
+          default:
+            signUpErr = 'Please fill out the "password" field'
+            break
+        }
       } else if(err.response.data.clientErr) {
         signUpErr = err.response.data.clientErr
       } else if(err.response.data.error) {
         signUpErr = err.response.data.error
+      } else if (err.response.data.message) {
+        signUpErr = err.response.data.message
       } else {
         // If I missed any errors to handle:
         signUpErr = "Unauthorized - Please Handle"
@@ -72,6 +87,73 @@ export const signUp = (data) => {
       });
     }
   }
+}
+
+// User Sign In actionCreator
+export const signIn = (data) => {
+  return async dispatch => {
+    try {
+      console.log('[ActionCreator] signIn called')
+      const res = await axios.post('/auth/signin', data)
+
+      console.log('res', res);
+      console.log('[ActionCreator] signIn dispatched an action')
+
+      dispatch({
+        type: AUTH_SIGN_IN,
+        payload: res.data.token,
+      });
+
+      localStorage.setItem('JWT_TOKEN', res.data.token);
+      axios.defaults.headers.common['Authorization'] = res.data.token;
+    }
+    catch(err) {
+      console.log('[ActionCreator] signIn dispatched a failed action')
+
+      console.log(err.response)
+      console.log(err.response.data.message)
+
+      if(err.response.data.details){
+        var signInErr = err.response.data.details[0].message
+        console.log('signInErr',signInErr)
+        // console.log('true or false', signInErr === '"email" is not allowed to be empty')
+        switch(signInErr) {
+          case '"email" is not allowed to be empty':
+            signInErr = 'Please fill out the "email" field'
+            break
+          case '"password" is not allowed to be empty':
+          default:
+            signInErr = 'Please fill out the "password" field'
+            break
+        }
+      } else if(err.response.data.clientErr) {
+        signInErr = err.response.data.clientErr
+      } else if(err.response.data.error) {
+        signInErr = err.response.data.error
+      } else if(err.response.data.message) {
+        signInErr = err.response.data.message
+      } else {
+        // If I missed any errors to handle:
+        signInErr = "Unauthorized - Please Handle"
+      }
+      
+      dispatch ({
+        type: AUTH_ERROR,
+        payload: signInErr
+      });
+    }
+  }
+}
+
+
+export const componentMount = () => {
+  return async dispatch => {
+
+    dispatch({
+      type: COMPONENT_MOUNT,
+      payload: '',
+    })
+  };
 }
 
 // fetchWidgets actionCreator

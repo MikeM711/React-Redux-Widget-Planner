@@ -11,12 +11,18 @@ class SignUp extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.responseGoogle = this.responseGoogle.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
       isWritingEmail: 'inactive',
       isWritingPassword: 'inactive',
       email: '',
       password: '',
     }
+  }
+
+  async componentDidMount(){
+    // Erase error messages if component mounted
+    await this.props.componentMount();
   }
  
   async handleSubmit(event) {
@@ -26,6 +32,9 @@ class SignUp extends Component {
       password: this.state.password
     }
     await this.props.signUp(data)
+    if (!this.props.errorMessage) {
+      this.props.history.push('/');
+    }
   }
 
   handleEmailChange = (event) => {
@@ -78,7 +87,6 @@ class SignUp extends Component {
 
   render() {
     const { isWritingEmail, isWritingPassword } = this.state
-    console.log('Are you authenticated?', this.props.isAuthenticated)
 
     return (
       <div className="sign-up">
@@ -110,6 +118,14 @@ class SignUp extends Component {
                     onBlur={this.handlePasswordBlur} />
                   <label className={isWritingPassword} htmlFor="password">Password</label>
                 </div>
+
+                {this.props.errorMessage ? (
+              <div className="errormessage col s10">
+              <div className="card-panel #ffebee red lighten-5 center">
+                <h6>{this.props.errorMessage}</h6>
+              </div>
+                
+              </div>) : (null)}
 
                 <div className="btn-field col s10">
                   <button className="btn waves-effect waves-light #64b5f6 blue lighten-2 sign-up-btn" >Sign Up</button>
