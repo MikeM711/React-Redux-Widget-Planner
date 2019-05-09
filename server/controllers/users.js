@@ -88,4 +88,13 @@ module.exports = {
     console.log('I managed to get here!')
     res.json({ secret: "resource" })
   },
+
+  profile: async (req,res,next) => {
+    if(req.user.dataValues.googleName){
+      var profile = req.user.dataValues.googleName
+    } else if (req.user.dataValues.email){
+      var profile = req.user.dataValues.email
+    }
+    res.json({ profile: profile})
+  }
 }

@@ -12,6 +12,7 @@ import {
   AUTH_SIGN_OUT,
   AUTH_ERROR,
   COMPONENT_MOUNT,
+  FETCH_PROFILE,
   } from './types';
 
 
@@ -329,6 +330,25 @@ export const deleteWidgetHist = id => {
     }
     catch(err) {
       console.log('err', err) 
+    }
+  }
+}
+
+export const fetchProfile = () => {
+  return async dispatch=> {
+    try {
+
+      // const jwtToken = localStorage.getItem('JWT_TOKEN');
+      const res = await axios.get('/auth/profile')
+      
+      dispatch({
+        type: FETCH_PROFILE,
+        payload: res.data.profile
+      })
+      
+    }
+    catch(err) {
+
     }
   }
 }

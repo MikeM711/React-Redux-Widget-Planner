@@ -40,4 +40,7 @@ router.route('/oauth/google')
 router.route('/secret')
   .get(passport.authenticate('jwt', { session: false }), UsersController.secret)
 
+router.route('/profile')
+  .get(passport.authenticate('jwt', { session: false }), UsersController.profile);
+
 module.exports = router;

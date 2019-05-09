@@ -26,7 +26,7 @@ passport.use(new JwtStrategy({
 
       // Otherwise, return the user
       if (DBuser) {
-        return done(null, user);
+        return done(null, DBuser);
       }
     })
     .catch(err => {
@@ -64,11 +64,16 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
         return done(null, existingUser)
       }
 
+      console.log('first name: ', profile.name.givenName)
+      console.log('last name: ', profile.name.familyName)
+      const googleName = `${profile.name.givenName} ${profile.name.familyName}`
+
       // If new account - put them in the DB
       const newUser = {
         method: 'google',
         googleId: profile.id,
-        googleEmail: profile.emails[0].value
+        googleEmail: profile.emails[0].value,
+        googleName: googleName
       }
 
       user.create(newUser)
