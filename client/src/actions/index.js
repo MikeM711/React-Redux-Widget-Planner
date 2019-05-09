@@ -7,12 +7,14 @@ import {
   ADD_WIDGET_USER_HISTORY,
   DELETE_WIDGET_USER_HISTORY,
   CALCULATE_USER_HISTORY,
+  CLEAR_USER_HISTORY,
   AUTH_SIGN_UP,
   AUTH_SIGN_IN,
   AUTH_SIGN_OUT,
   AUTH_ERROR,
   COMPONENT_MOUNT,
   FETCH_PROFILE,
+  PROFILE_SIGN_OUT,
   } from './types';
 
 
@@ -148,14 +150,31 @@ export const signIn = (data) => {
 }
 
 export const signOut = () => {
-  return dispatch => {
-    localStorage.removeItem('JWT_TOKEN');
-    axios.defaults.headers.common['Authorization'] = '';
+  return async dispatch => {
+    try {
+      localStorage.removeItem('JWT_TOKEN');
+      axios.defaults.headers.common['Authorization'] = '';
+  
+      await dispatch({
+        type: AUTH_SIGN_OUT,
+        payload: '',
+      })
+  
+      await dispatch({
+        type: PROFILE_SIGN_OUT,
+        payload: '',
+      })
 
-    dispatch({
-      type: AUTH_SIGN_OUT,
-      payload: '',
-    })
+      await dispatch ({
+        type: CLEAR_USER_HISTORY,
+        payload: '',
+      })
+      
+    }
+    catch(err) {
+      console.log('signOut err', err)
+    }
+
   };
 }
 
