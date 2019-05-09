@@ -43,4 +43,7 @@ router.route('/secret')
 router.route('/profile')
   .get(passport.authenticate('jwt', { session: false }), UsersController.profile);
 
+router.route('/widgetcalculations')
+  .get(passport.authenticate('jwt', { session: false }), UsersController.widgetCalculations);
+
 module.exports = router;

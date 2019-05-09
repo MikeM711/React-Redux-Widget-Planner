@@ -9,6 +9,7 @@ class Form extends Component {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitProfileResults = this.submitProfileResults.bind(this);
     this.state = {
       widgetSelect: '',
       qtySelect: '',
@@ -74,7 +75,13 @@ class Form extends Component {
         errorMsg: 'Please Select A Widget And Input A Quantity'
       })
     }
+  }
 
+  async submitProfileResults() {
+    // console.log('Results have been submitted!')
+    // console.log('userHistory', this.props.userHistory)
+    // console.log('userHistTotal', this.props.userHistTotal)
+    await this.props.submitProfileResults(this.props.userHistory, this.props.userHistTotal)
   }
 
   render() {
@@ -86,22 +93,28 @@ class Form extends Component {
     })
 
     return (
+  
       <div className="calculator-form">
         <h5 className="center red-text">Form Component</h5>
         <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            {/* <div className="col s8 offset-s2"> */}
+            <select className="browser-default widget-dropdown-menu" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
+              <option value=''>-- Choose A Widget --</option>
+              {widgetList}
+            </select>
+            <input placeholder="Number of Widgets" id="widget_quantity" type="number" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
+            <br/>
+            <button className="btn waves-effect waves-light formbtn" >Calculate</button>
 
-              <select className="browser-default widget-dropdown-menu" onChange={this.handleWidgetChange} value={this.state.widgetSelect}>
-                <option value=''>-- Choose A Widget --</option>
-                {widgetList}
-              </select>
-              <input placeholder="Number of Widgets" id="widget_quantity" type="number" className="validate" value={this.state.qtySelect} onChange={this.handleQtyChange}></input>
-              <br></br>
-              <button className="btn waves-effect waves-light formbtn" >Calculate</button>
-              
-            {/* </div> */}
+            {!this.props.userHistory.length === false ? (
+                <button className="btn waves-effect waves-light resultsbtn"
+                  type='button'
+                  onClick={this.submitProfileResults}>
+                  Submit Results to Profile
+              </button>
+              ) : null}
+            
           </div>
         </form>
       </div>
@@ -112,6 +125,8 @@ class Form extends Component {
 const mapStateToProps = (state) => {
   return {
     widgets: state.widgetRed.widgets,
+    userHistory: state.widgetRed.userHistory,
+    userHistTotal: state.widgetRed.userHistTotal,
   }
 }
 

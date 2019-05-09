@@ -16,7 +16,7 @@ class WidgetPage extends Component {
           <h2 className="center blue-text">Widget Material Calculator</h2>
           <Form />
 
-          {this.props.userHistTotal ? ([
+          {!this.props.userHistory.length === false ? ([
             <SelectedWidgets key="selected-widgets"/>,
             <ResultTotal key="result-total"/>
           ]) : (null)}
@@ -29,7 +29,7 @@ class WidgetPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userHistTotal: state.widgetRed.userHistTotal
+    userHistory: state.widgetRed.userHistory
   }
 }
 

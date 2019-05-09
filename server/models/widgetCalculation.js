@@ -8,53 +8,16 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     calculation: {
-      type: Sequelize.ARRAY(Sequelize.STRING),
+      type: Sequelize.JSON,
       allowNull: false,
     },
 
-    aluminum: {
-      type: Sequelize.NUMERIC,
+    calculation_total: {
+      type: Sequelize.JSON,
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
-    },
-
-    cold_rolled_steel: {
-      type: Sequelize.NUMERIC,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
-    },
-
-    galvanneal: {
-      type: Sequelize.NUMERIC,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
-    },
-
-    glass: {
-      type: Sequelize.NUMERIC,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
-    },
-
-    stainless_steel: {
-      type: Sequelize.NUMERIC,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      }
     },
 
   })
-
-  // Future: make a widget calculation model that you can save and display on your profile
 
   WidgetCalculationExport.associate = (models) => {
     WidgetCalculationExport.belongsTo(models.user, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })

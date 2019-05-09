@@ -6,3 +6,7 @@ div.calculator-form{
 select.widget-dropdown-menu:hover{
     cursor: pointer;
 }
+
+button.resultsbtn {
+    float:right
+}

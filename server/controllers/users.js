@@ -1,6 +1,6 @@
 const JWT = require('jsonwebtoken');
 const bCrypt = require('bcryptjs');
-const { user } = require('../models')
+const { user, widget_calculation } = require('../models')
 
 signToken = user => {
   return JWT.sign({
@@ -96,5 +96,29 @@ module.exports = {
       var profile = req.user.dataValues.email
     }
     res.json({ profile: profile})
+  },
+
+  widgetCalculations: async (req,res,next) => {
+    try {
+      // Get the id of the user in our database
+      const userId = req.user.dataValues.id
+      console.log('userId',userId)
+
+      // Find the calculations by the user
+      const userCalcs = await widget_calculation.findAll({
+        where: {
+          userId: userId
+        }
+      })
+
+      console.log(userCalcs)
+      res.status(200).json({ userCalcs })
+
+      //Future: iterate through all rows of userCalcs, put them in an object, send them to client
+
+    }
+    catch(err) {
+      console.log('Error in retrieving calculations:', err)
+    }
   }
 }

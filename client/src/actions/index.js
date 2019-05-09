@@ -354,7 +354,7 @@ export const deleteWidgetHist = id => {
 }
 
 export const fetchProfile = () => {
-  return async dispatch=> {
+  return async dispatch => {
     try {
 
       // const jwtToken = localStorage.getItem('JWT_TOKEN');
@@ -367,7 +367,24 @@ export const fetchProfile = () => {
       
     }
     catch(err) {
+      console.log('err', err)
+    }
+  }
+}
+
+export const submitProfileResults = (userHistory, userHistTotal) => {
+  return async dispatch => {
+    try {
+      console.log('submitProfileResults actionCreator')
+      console.log('userHistory', userHistory)
+      console.log('userHistTotal', userHistTotal)
+
+      // Make an axios request to submit these results
 
     }
+    catch(err) {
+      console.log('err', err)
+    }
+
   }
 }
