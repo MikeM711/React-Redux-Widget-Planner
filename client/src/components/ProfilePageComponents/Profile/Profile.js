@@ -15,6 +15,15 @@ class Profile extends Component {
 
   async componentDidMount() {
     await this.props.fetchProfile()
+    /* When we enter the "Profile" page after sign in/sign up, we would like to get all of the widgets
+      in the database, so that we can instantly make comparisons. These comparisons will notify the user that their
+      calculations are synced or not synced to the widget database.
+    */
+
+    // BRING THE BELOW INTO "SINGLECALCULATION" COMPONENT INSTEAD!
+    if (this.props.widgets === [] ) {
+      await this.props.fetchWidgetsDB()
+    }
   }
 
   async handleDeleteCalc(id) {

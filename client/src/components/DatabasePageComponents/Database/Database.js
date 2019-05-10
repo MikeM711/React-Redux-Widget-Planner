@@ -39,6 +39,7 @@ class Database extends Component {
   }
 
   render() {
+    console.log('database', this.props.widgets)
     // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
       // console.log(widgetInfo)

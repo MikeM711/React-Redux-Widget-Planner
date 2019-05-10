@@ -22,7 +22,7 @@ class SignUp extends Component {
 
   async componentDidMount(){
     if(this.props.token && this.props.isAuthenticated){
-      this.props.history.push('/')
+      this.props.history.push('/profile')
     }
     // Erase error messages if component mounted
     await this.props.componentMount();
@@ -36,7 +36,7 @@ class SignUp extends Component {
     }
     await this.props.signUp(data)
     if (!this.props.errorMessage) {
-      this.props.history.push('/');
+      this.props.history.push('/profile');
     }
   }
 
@@ -84,7 +84,7 @@ class SignUp extends Component {
     console.log('responseGoogle', res);
     await this.props.oauthGoogle(res.accessToken)
     if (!this.props.errorMessage) {
-      this.props.history.push('/');
+      this.props.history.push('/profile');
     }
   }
 

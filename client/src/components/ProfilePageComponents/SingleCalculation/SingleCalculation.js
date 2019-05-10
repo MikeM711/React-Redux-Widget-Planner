@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './SingleCalculation.css';
 class SingleCalculation extends Component {
@@ -8,13 +9,25 @@ class SingleCalculation extends Component {
   }
 
   render() {
-    const { calc, int } = this.props
+    const { calc, int, widgets } = this.props
+    /*
+      - The "modifiedAt" value (select.modifiedAt) of the widgets that were used, must be
+        equal to the "modifiedAt" value of our Redux store!
+
+    */
+    console.log('singleCalulation widgets this.props', widgets)
+    console.log('singlecalculation, calc', calc)
     const caclTotal = calc.calculation_total
     const postgresDate = calc.createdAt
     const index = postgresDate.indexOf('T')
     const date = postgresDate.slice(0, index)
 
     const calculation = calc.calculation.map(select => {
+      console.log('singlecalculation, select', select)
+
+      // General structure of the comparison
+      console.log('Are the modifiedAt times different?', select.updatedAt, /*widgets[0].updatedAt*/)
+
       return (
         <div className="single-calculation" key={select.id}>
           <br />
@@ -56,4 +69,10 @@ class SingleCalculation extends Component {
   }
 }
 
-export default SingleCalculation;
+const mapStateToProps = (state) => {
+  return {
+    widgets: state.widgetRed.widgets
+  }
+}
+
+export default connect(mapStateToProps)(SingleCalculation);
