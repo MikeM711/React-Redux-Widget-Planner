@@ -43,7 +43,7 @@ router.route('/secret')
 router.route('/profile')
   .get(passport.authenticate('jwt', { session: false }), UsersController.profile);
 
-router.route('/widgetcalculations')
-  .get(passport.authenticate('jwt', { session: false }), UsersController.widgetCalculations);
+router.route('/userwidgetcalculation')
+  .post(passport.authenticate('jwt', { session: false }), UsersController.userWgtCalc);
 
 module.exports = router;

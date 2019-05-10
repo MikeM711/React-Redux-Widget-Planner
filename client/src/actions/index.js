@@ -15,7 +15,7 @@ import {
   COMPONENT_MOUNT,
   FETCH_PROFILE,
   PROFILE_SIGN_OUT,
-  } from './types';
+} from './types';
 
 
 // Google actionCreator
@@ -56,16 +56,16 @@ export const signUp = (data) => {
       localStorage.setItem('JWT_TOKEN', res.data.token);
       axios.defaults.headers.common['Authorization'] = res.data.token;
     }
-    catch(err) {
+    catch (err) {
       console.log('[ActionCreator] signUp dispatched a failed action')
 
       console.log(err.response)
 
-      if(err.response.data.details){
+      if (err.response.data.details) {
         var signUpErr = err.response.data.details[0].message
-        console.log('signUpErr',signUpErr)
+        console.log('signUpErr', signUpErr)
         // console.log('true or false', signInErr === '"email" is not allowed to be empty')
-        switch(signUpErr) {
+        switch (signUpErr) {
           case '"email" is not allowed to be empty':
             signUpErr = 'Please fill out the "email" field'
             break
@@ -74,9 +74,9 @@ export const signUp = (data) => {
             signUpErr = 'Please fill out the "password" field'
             break
         }
-      } else if(err.response.data.clientErr) {
+      } else if (err.response.data.clientErr) {
         signUpErr = err.response.data.clientErr
-      } else if(err.response.data.error) {
+      } else if (err.response.data.error) {
         signUpErr = err.response.data.error
       } else if (err.response.data.message) {
         signUpErr = err.response.data.message
@@ -84,8 +84,8 @@ export const signUp = (data) => {
         // If I missed any errors to handle:
         signUpErr = "Unauthorized - Please Handle"
       }
-      
-      dispatch ({
+
+      dispatch({
         type: AUTH_ERROR,
         payload: signUpErr
       });
@@ -111,17 +111,17 @@ export const signIn = (data) => {
       localStorage.setItem('JWT_TOKEN', res.data.token);
       axios.defaults.headers.common['Authorization'] = res.data.token;
     }
-    catch(err) {
+    catch (err) {
       console.log('[ActionCreator] signIn dispatched a failed action')
 
       console.log(err.response)
       console.log(err.response.data.message)
 
-      if(err.response.data.details){
+      if (err.response.data.details) {
         var signInErr = err.response.data.details[0].message
-        console.log('signInErr',signInErr)
+        console.log('signInErr', signInErr)
         // console.log('true or false', signInErr === '"email" is not allowed to be empty')
-        switch(signInErr) {
+        switch (signInErr) {
           case '"email" is not allowed to be empty':
             signInErr = 'Please fill out the "email" field'
             break
@@ -130,18 +130,18 @@ export const signIn = (data) => {
             signInErr = 'Please fill out the "password" field'
             break
         }
-      } else if(err.response.data.clientErr) {
+      } else if (err.response.data.clientErr) {
         signInErr = err.response.data.clientErr
-      } else if(err.response.data.error) {
+      } else if (err.response.data.error) {
         signInErr = err.response.data.error
-      } else if(err.response.data.message) {
+      } else if (err.response.data.message) {
         signInErr = err.response.data.message
       } else {
         // If I missed any errors to handle:
         signInErr = "Unauthorized - Please Handle"
       }
-      
-      dispatch ({
+
+      dispatch({
         type: AUTH_ERROR,
         payload: signInErr
       });
@@ -154,24 +154,24 @@ export const signOut = () => {
     try {
       localStorage.removeItem('JWT_TOKEN');
       axios.defaults.headers.common['Authorization'] = '';
-  
+
       await dispatch({
         type: AUTH_SIGN_OUT,
         payload: '',
       })
-  
+
       await dispatch({
         type: PROFILE_SIGN_OUT,
         payload: '',
       })
 
-      await dispatch ({
+      await dispatch({
         type: CLEAR_USER_HISTORY,
         payload: '',
       })
-      
+
     }
-    catch(err) {
+    catch (err) {
       console.log('signOut err', err)
     }
 
@@ -219,10 +219,10 @@ export const fetchWidgetsDB = data => {
         })
       }
     }
-    catch(err) {
+    catch (err) {
       console.log('fetchWidgets ERR:', err)
     }
-  
+
   }
 }
 
@@ -230,7 +230,7 @@ export const addWidgetDB = data => {
   return async dispatch => {
     try {
       console.log(data)
-      const res = await axios.post('/widget/widgetPOST', {newWidget: data})
+      const res = await axios.post('/widget/widgetPOST', { newWidget: data })
 
       const resWidget = res.data.data
       console.log(resWidget)
@@ -253,10 +253,10 @@ export const addWidgetDB = data => {
       })
 
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
     }
-  
+
   }
 }
 
@@ -271,7 +271,7 @@ export const deleteWidgetDB = id => {
       })
 
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
 
     }
@@ -282,7 +282,7 @@ export const updateWidgetDB = data => {
   return async dispatch => {
     try {
 
-      const updatedWidget = await axios.put('widget/widgetUPDATE', {updatedWidget: data})
+      const updatedWidget = await axios.put('widget/widgetUPDATE', { updatedWidget: data })
 
       const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = updatedWidget.data.data
 
@@ -302,7 +302,7 @@ export const updateWidgetDB = data => {
       })
 
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
     }
   }
@@ -325,7 +325,7 @@ export const addWidgetHist = data => {
       })
 
     }
-    catch(err) {
+    catch (err) {
       console.log('err', err)
     }
   }
@@ -339,7 +339,7 @@ export const deleteWidgetHist = id => {
         type: DELETE_WIDGET_USER_HISTORY,
         payload: id
       })
-      
+
       // after "delete widget" is dispatched, and redux state is updated, calculate the total history
       dispatch({
         type: CALCULATE_USER_HISTORY,
@@ -347,8 +347,8 @@ export const deleteWidgetHist = id => {
       })
 
     }
-    catch(err) {
-      console.log('err', err) 
+    catch (err) {
+      console.log('err', err)
     }
   }
 }
@@ -356,35 +356,38 @@ export const deleteWidgetHist = id => {
 export const fetchProfile = () => {
   return async dispatch => {
     try {
-
-      // const jwtToken = localStorage.getItem('JWT_TOKEN');
       const res = await axios.get('/auth/profile')
-      
       dispatch({
         type: FETCH_PROFILE,
         payload: res.data.profile
       })
-      
     }
-    catch(err) {
+    catch (err) {
       console.log('err', err)
     }
   }
 }
 
-export const submitProfileResults = (userHistory, userHistTotal) => {
+export const addResultToProfile = (userHistory, userHistTotal) => {
   return async dispatch => {
     try {
       console.log('submitProfileResults actionCreator')
       console.log('userHistory', userHistory)
       console.log('userHistTotal', userHistTotal)
+      const data = {
+        userHistory,
+        userHistTotal
+      }
+      await axios.post('/auth/userwidgetcalculation', data)
 
-      // Make an axios request to submit these results
+      dispatch({
+        type: CLEAR_USER_HISTORY,
+        payload: ''
+      })
 
     }
-    catch(err) {
+    catch (err) {
       console.log('err', err)
     }
-
   }
 }

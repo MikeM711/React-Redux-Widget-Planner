@@ -78,10 +78,7 @@ class Form extends Component {
   }
 
   async submitProfileResults() {
-    // console.log('Results have been submitted!')
-    // console.log('userHistory', this.props.userHistory)
-    // console.log('userHistTotal', this.props.userHistTotal)
-    await this.props.submitProfileResults(this.props.userHistory, this.props.userHistTotal)
+    await this.props.addResultToProfile(this.props.userHistory, this.props.userHistTotal)
   }
 
   render() {

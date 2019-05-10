@@ -21,9 +21,9 @@ module.exports = {
     const emailLC = email.toLowerCase()
 
     // Generate salt and hash
-    var generateHash = function(password) {
+    var generateHash = function (password) {
       return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-      };
+    };
 
     var userPassword = generateHash(password);
 
@@ -89,35 +89,41 @@ module.exports = {
     res.json({ secret: "resource" })
   },
 
-  profile: async (req,res,next) => {
-    if(req.user.dataValues.googleName){
-      var profile = req.user.dataValues.googleName
-    } else if (req.user.dataValues.email){
-      var profile = req.user.dataValues.email
-    }
-    res.json({ profile: profile})
-  },
-
-  widgetCalculations: async (req,res,next) => {
+  profile: async (req, res, next) => {
     try {
-      // Get the id of the user in our database
+      let profile = {}
+      if (req.user.dataValues.googleName) {
+        profile.name = req.user.dataValues.googleName
+      } else if (req.user.dataValues.email) {
+        profile.name = req.user.dataValues.email
+      }
       const userId = req.user.dataValues.id
-      console.log('userId',userId)
-
       // Find the calculations by the user
       const userCalcs = await widget_calculation.findAll({
         where: {
           userId: userId
         }
       })
-
-      console.log(userCalcs)
-      res.status(200).json({ userCalcs })
-
-      //Future: iterate through all rows of userCalcs, put them in an object, send them to client
-
+      profile.userCalcs = userCalcs
+      res.json({ profile: profile })
     }
-    catch(err) {
+    catch (err) {
+      console.log('Error in fetching profile', err)
+    }
+  },
+
+  userWgtCalc: async (req, res, next) => {
+    try {
+      const userId = req.user.dataValues.id
+      const data = {
+        calculation: req.body.userHistory,
+        calculation_total: req.body.userHistTotal,
+        userId
+      }
+      const newWgtCalc = await widget_calculation.create(data)
+      res.json({ newWgtCalc: newWgtCalc.dataValues })
+    }
+    catch (err) {
       console.log('Error in retrieving calculations:', err)
     }
   }

@@ -3,7 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import WidgetPage from './components/WidgetPageComponents/WidgetPage/WidgetPage';
 import Database from './components/DatabasePageComponents/Database/Database';
-import Profile from './components/Profile/Profile';
+import Profile from './components/ProfilePageComponents/Profile/Profile';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import SignOut from './components/SignOut/SignOut';
