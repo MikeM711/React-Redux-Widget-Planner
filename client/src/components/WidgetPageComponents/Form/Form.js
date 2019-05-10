@@ -78,7 +78,8 @@ class Form extends Component {
   }
 
   async submitProfileResults() {
-    await this.props.addResultToProfile(this.props.userHistory, this.props.userHistTotal)
+    await this.props.addResultToProfile(this.props.userHistory, this.props.userHistTotal);
+    await this.props.history.push('/profile')
   }
 
   render() {

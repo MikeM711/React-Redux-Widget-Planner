@@ -83,7 +83,7 @@ class AddWidget extends Component {
             </div>
 
             <div className="input-field col s2">
-              <input placeholder="Sheets" id="aluminum" type="number" required
+              <input placeholder="Sheets" id="aluminum" type="number" step="any" required
                 value={alum}
                 onChange={this.handleAlumChange} />
               <label htmlFor="aluminum"></label>
@@ -91,7 +91,7 @@ class AddWidget extends Component {
             </div>
 
             <div className="input-field col s2">
-              <input placeholder="Sheets" id="cr_steel" type="number" required
+              <input placeholder="Sheets" id="cr_steel" type="number" step="any" required
                 value={crSteel}
                 onChange={this.handleCrSteelChange} />
               <label htmlFor="cr_steel"></label>
@@ -103,7 +103,7 @@ class AddWidget extends Component {
           <div className="add-widget-row2 row">
 
             <div className="input-field col s2 offset-s3">
-              <input placeholder="Sheets" id="galvanneal" type="number" required
+              <input placeholder="Sheets" id="galvanneal" type="number" step="any" required
                 value={galv}
                 onChange={this.handleGalvChange} />
               <label htmlFor="galvanneal"></label>
@@ -111,7 +111,7 @@ class AddWidget extends Component {
             </div>
 
             <div className="input-field col s2">
-              <input placeholder="Sheets" id="glass" type="number" required
+              <input placeholder="Sheets" id="glass" type="number" step="any" required
                 value={glass}
                 onChange={this.handleGlassChange} />
               <label htmlFor="glass"></label>
@@ -119,7 +119,7 @@ class AddWidget extends Component {
             </div>
 
             <div className="input-field col s2">
-              <input placeholder="Sheets" id="ss_steel" type="number" required
+              <input placeholder="Sheets" id="ss_steel" type="number" step="any" required
                 value={sSteel}
                 onChange={this.handleSSteelChange} />
               <label htmlFor="ss_steel"></label>

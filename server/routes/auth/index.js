@@ -46,4 +46,7 @@ router.route('/profile')
 router.route('/userwidgetcalculation')
   .post(passport.authenticate('jwt', { session: false }), UsersController.userWgtCalc);
 
+router.route('/deletewidgetcalculation/:id')
+  .delete(passport.authenticate('jwt', { session: false }), UsersController.deleteWgtCalc)
+
 module.exports = router;

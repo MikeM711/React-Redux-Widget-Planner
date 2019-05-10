@@ -14,6 +14,7 @@ import {
   AUTH_ERROR,
   COMPONENT_MOUNT,
   FETCH_PROFILE,
+  PROFILE_DELETE_CALCULATION,
   PROFILE_SIGN_OUT,
 } from './types';
 
@@ -195,14 +196,15 @@ export const fetchWidgetsDB = data => {
     try {
       console.log('before fetching widgets')
       const res = await axios.get('/widget/widgets');
-      console.log(res.data.allWidgets);
+      console.log('response of fetch widget', res.data.allWidgets);
 
       const widgetArr = res.data.allWidgets;
 
       for (let i = 0; i < widgetArr.length; i++) {
         // console.log(widgetArr[i])
 
-        const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = widgetArr[i]
+        const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, 
+          stainless_steel, createdAt, updatedAt } = widgetArr[i]
 
         const widgetData = {
           id: id,
@@ -211,7 +213,9 @@ export const fetchWidgetsDB = data => {
           crSteel: cold_rolled_steel,
           galv: galvanneal,
           glass: glass,
-          sSteel: stainless_steel
+          sSteel: stainless_steel,
+          createdAt,
+          updatedAt
         }
         dispatch({
           type: FETCH_WIDGETS_DB,
@@ -233,9 +237,10 @@ export const addWidgetDB = data => {
       const res = await axios.post('/widget/widgetPOST', { newWidget: data })
 
       const resWidget = res.data.data
-      console.log(resWidget)
+      console.log('addWidgetDB', resWidget)
 
-      const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = resWidget
+      const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, 
+        stainless_steel, createdAt, updatedAt } = resWidget
 
       const newWidget = {
         id: id,
@@ -244,7 +249,9 @@ export const addWidgetDB = data => {
         crSteel: cold_rolled_steel,
         galv: galvanneal,
         glass: glass,
-        sSteel: stainless_steel
+        sSteel: stainless_steel,
+        createdAt,
+        updatedAt
       }
 
       dispatch({
@@ -284,7 +291,8 @@ export const updateWidgetDB = data => {
 
       const updatedWidget = await axios.put('widget/widgetUPDATE', { updatedWidget: data })
 
-      const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, stainless_steel } = updatedWidget.data.data
+      const { id, name, aluminum, cold_rolled_steel, galvanneal, glass, 
+        stainless_steel, createdAt, updatedAt  } = updatedWidget.data.data
 
       const newWidget = {
         id: id,
@@ -293,7 +301,9 @@ export const updateWidgetDB = data => {
         crSteel: cold_rolled_steel,
         galv: galvanneal,
         glass: glass,
-        sSteel: stainless_steel
+        sSteel: stainless_steel,
+        createdAt,
+        updatedAt
       }
 
       dispatch({
@@ -388,6 +398,23 @@ export const addResultToProfile = (userHistory, userHistTotal) => {
     }
     catch (err) {
       console.log('err', err)
+    }
+  }
+}
+
+export const deleteProfileResult = (id) => {
+  return async dispatch => {
+    try{
+      console.log('deleteProfileResult id',id)
+      const res = await axios.delete(`/auth/deletewidgetcalculation/${id}`)
+
+      dispatch({
+        type: PROFILE_DELETE_CALCULATION,
+        payload: id
+      })
+    }
+    catch (err) {
+      console.log('err',err)
     }
   }
 }

@@ -126,5 +126,20 @@ module.exports = {
     catch (err) {
       console.log('Error in retrieving calculations:', err)
     }
+  },
+
+  deleteWgtCalc: async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const delWidgetCalcRes = await widget_calculation.destroy({ where: { id } })
+      if (delWidgetCalcRes === 1) {
+        res.status(200).json({ success: true });
+      } else {
+        res.status(400).json({ err: 'Database did not delete correctly' })
+      }
+    }
+    catch (err) {
+      console.log('err', err)
+    }
   }
 }

@@ -192,7 +192,7 @@ class DatabaseWidget extends Component {
                 <div className="db-widget-property galv col m8ths">{galv}</div>
                 <div className="db-widget-property glass col m8ths">{glass}</div>
                 <div className="db-widget-property sSteel col m8ths">{sSteel}</div>
-                <button href="" className="#e57373 btn waves-effect waves-light red lighten-2 delete btn col m8ths"
+                <button href="" className="#e57373 waves-effect waves-light red lighten-2 delete btn col m8ths"
                   onClick={this.handleDeleteWidgetDB}
                 >Delete</button>
               </div>

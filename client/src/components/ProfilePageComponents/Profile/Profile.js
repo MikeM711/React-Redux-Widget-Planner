@@ -10,10 +10,15 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.handleDeleteCalc = this.handleDeleteCalc.bind(this)
   }
 
   async componentDidMount() {
     await this.props.fetchProfile()
+  }
+
+  async handleDeleteCalc(id) {
+    await this.props.deleteProfileResult(id)
   }
 
   render() {
@@ -25,7 +30,8 @@ class Profile extends Component {
           <SingleCalculation
             key={calc.id}
             calc={calc}
-            int={i} />
+            int={i}
+            deleteCalc={this.handleDeleteCalc}/>
         )
       })) : (
         <div className="no-calculations">

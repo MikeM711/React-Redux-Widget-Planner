@@ -5,3 +5,11 @@ div.single-material-calculation {
 div.calculation-select-list {
   padding: 10px
 }
+
+h6.calculation-number {
+  float:left
+}
+
+button.delete-calculation {
+  float:right
+}

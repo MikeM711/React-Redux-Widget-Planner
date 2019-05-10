@@ -14,7 +14,7 @@ class WidgetPage extends Component {
         <Navbar />
         <div className="container">
           <h2 className="center blue-text">Widget Material Calculator</h2>
-          <Form />
+          <Form {...this.props}/>
 
           {!this.props.userHistory.length === false ? ([
             <SelectedWidgets key="selected-widgets"/>,

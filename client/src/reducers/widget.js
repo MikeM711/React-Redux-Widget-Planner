@@ -19,20 +19,21 @@ function widgetReducer(state = initState, action) {
   switch (action.type) {
     case FETCH_WIDGETS_DB:
       console.log('[WidgetReducer] got a FETCH_WIDGETS_DB action')
-      return { ...state, widgets: [...state.widgets, action.payload] }
+      const sortFetchWidgets = alphabetize([...state.widgets, action.payload])
+      return { ...state, widgets: sortFetchWidgets }
     case ADD_WIDGET_DB:
       console.log('[WidgetReducer] got a ADD_WIDGET_DB action')
-      return {...state, widgets: [...state.widgets, action.payload] }
+      const sortAddWidgets = alphabetize([...state.widgets, action.payload])
+      return { ...state, widgets: sortAddWidgets }
     case DELETE_WIDGET_DB:
       console.log('[WidgetReducer] got a DELETE_WIDGET_DB action')
-      const filterWidgets = deleteWgtDB(action.payload,state)
-      return {...state, widgets: filterWidgets}
+      const filterWidgets = deleteWgtDB(action.payload, state)
+      return { ...state, widgets: filterWidgets }
     case UPDATE_WIDGET_DB:
       console.log('[WidgetReducer] got a UPDATE_WIDGET_DB action')
-      console.log('action.payload',action.payload)
-      const updatedWidgets = findAndReplace(action.payload,state)
-      console.log(updatedWidgets)
-      return {...state, widgets: updatedWidgets}
+      const updatedWidgets = findAndReplace(action.payload, state)
+      const sortUpdateWidgets = alphabetize(updatedWidgets)
+      return { ...state, widgets: sortUpdateWidgets }
     case ADD_WIDGET_USER_HISTORY:
       console.log('[WidgetReducer] got a ADD_WIDGET_USER_HISTORY action')
       const newWidget = addWidget(action.payload, state)
@@ -46,10 +47,14 @@ function widgetReducer(state = initState, action) {
       return { ...state, userHistTotal: sumHistory }
     case CLEAR_USER_HISTORY:
       console.log('[WidgetReducer] got a CLEAER_USER_HISTORY action')
-      return {...state, userHistory: [], userHistTotal: ''}
+      return { ...state, userHistory: [], userHistTotal: '' }
     default:
       return state
   }
+}
+
+const alphabetize = (widgets) => {
+  return widgets.sort((a, b) => (a.widget > b.widget) ? 1 : -1)
 }
 
 const findAndReplace = (updatedItem, state) => {
@@ -65,7 +70,7 @@ const findAndReplace = (updatedItem, state) => {
   return widgetsCopy;
 };
 
-function twoDec (num){
+function twoDec(num) {
   const numTwoDec = Number(num.toFixed(2));
   return numTwoDec
 }
