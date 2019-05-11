@@ -128,10 +128,8 @@ class AddWidget extends Component {
 
           </div>
 
-          <div className="submit-button-row row">
-            <div className="button-offset col s2 offset-s3">
-              <input className="add-widget-submit-btn waves-effect waves-light btn" type="submit" />
-            </div>
+          <div className="submit-button-row row center">
+              <button className="add-widget-submit-btn waves-effect waves-light btn #0288d1 light-blue darken-2" type="submit">Submit Widget To Database</button>
           </div>
 
         </form >

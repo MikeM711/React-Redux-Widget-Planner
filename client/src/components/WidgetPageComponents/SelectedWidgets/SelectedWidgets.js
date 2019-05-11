@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './SelectedWidgets.css';
 import SingleWidget from '../SingleWidget/SingleWidget';
 import * as actions from '../../../actions';
 
@@ -16,7 +15,6 @@ class SelectedWidgets extends Component {
   }
 
   render() {
-
     const widgetResult = this.props.userHistory.length ? (
       this.props.userHistory.map(result => {
 
@@ -48,7 +46,6 @@ class SelectedWidgets extends Component {
 
     return (
       <div className="calculator-results">
-        <h5 className="center green-text">Results Component</h5>
         {widgetResult}
       </div>
     );

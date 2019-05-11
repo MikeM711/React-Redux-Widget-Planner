@@ -3,6 +3,11 @@ div.add-widget-row2 , div.add-widget-row1 {
   margin: 0px;
 }
 
-input.add-widget-submit-btn {
-  margin-top: 20px
+div.submit-button-row {
+  margin-top: 20px;
+}
+
+button.add-widget-submit-btn:hover {
+  opacity: 0.7;
+  transition: all 0.2s ease-in-out;
 }

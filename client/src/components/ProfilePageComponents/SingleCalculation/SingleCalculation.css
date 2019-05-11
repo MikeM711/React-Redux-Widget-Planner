@@ -1,15 +1,20 @@
 div.single-material-calculation {
-  padding-left: 15px
+  padding-left: 15px;
 }
 
 div.calculation-select-list {
-  padding: 10px
+  padding: 10px;
 }
 
 h6.calculation-number {
-  float:left
+  float:left;
 }
 
-button.delete-calculation {
-  float:right
+button.delete-calculation-btn {
+  float:right;
+}
+
+button.delete-calculation-btn:hover {
+  float:right;
+  opacity: 0.7
 }

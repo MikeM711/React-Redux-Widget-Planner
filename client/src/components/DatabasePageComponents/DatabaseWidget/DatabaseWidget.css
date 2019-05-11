@@ -1,12 +1,11 @@
-
-/* Properties Row */
 div.widget-properties {
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     overflow: hidden;
+    
     padding-left: 2.5%;
-    max-width: 1200px
+    max-width: 1200px;
 }
 
 .row .db-widget-property.col.m8ths {
@@ -25,26 +24,27 @@ div.widget-properties {
 }
 
 .edit-widget-property {
-    width: 12%;
-    background: #ededed;
-    border: 1px solid black;
-
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+
+    width: 12%;
+    background: #ededed;
+    border: 1px solid black;
 }
 
 .edit.btn.col.m8ths, .delete.btn.col.m8ths {
-    width: 12%;
-    border: 1px solid black;
     height: inherit;  
     transition: all 0.2s ease-in-out;
+
+    width: 12%;
+    border: 1px solid black;
 }
 
 .edit.btn.col.m8ths:hover, .delete.btn.col.m8ths:hover { 
     opacity: 0.75;
-    padding-left: 3%
+    padding-left: 3%;
 }
 
 div.edit-col {

@@ -75,7 +75,6 @@ class SingleCalculation extends Component {
         notFound.push(key)
       }
       if (value === 'oldVer') {
-        // oldVer = [...oldVer , key]
         oldVer.push(key)
       }
     }
@@ -110,7 +109,7 @@ class SingleCalculation extends Component {
     return (
       <div className="calculation-select-list card #f5f5f5 grey lighten-4" key={calc.id}>
         <h6 className="calculation-number"><b>Calculation #{int}: {date} </b></h6>
-        <button href="" className="#e57373 waves-effect waves-light btn delete-calculation red lighten-2"
+        <button href="" className="#e57373 waves-effect waves-light btn delete-calculation-btn red lighten-2"
           onClick={() => { this.deleteCalc(calc.id) }}
         >Delete</button>
         <br />

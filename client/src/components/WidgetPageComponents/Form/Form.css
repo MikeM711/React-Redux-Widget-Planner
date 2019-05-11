@@ -1,12 +1,7 @@
-div.calculator-form{
-    max-width: 700px;
-    margin: auto
-}
-
 select.widget-dropdown-menu:hover{
-    cursor: pointer;
+  cursor: pointer;
 }
 
-button.resultsbtn {
-    float:right
+button.results-btn {
+  float: right;
 }

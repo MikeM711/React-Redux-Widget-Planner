@@ -1,14 +1,10 @@
-div.sign-up-container {
-  margin-top: 20px;
-}
-
-div.sign-up-container .sign-up .card-panel{
+div.sign-in-container .sign-in .card-panel{
   background: red;
-  padding-top:10px;
-  padding-bottom:15px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   box-shadow: none;
 }
 
-button.sign-up-btn:hover{
-  opacity:0.75;
+button.sign-in-btn:hover{
+  opacity: 0.75;
 }

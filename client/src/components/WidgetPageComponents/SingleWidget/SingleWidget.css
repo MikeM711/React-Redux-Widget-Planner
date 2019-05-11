@@ -4,15 +4,15 @@ td.delete-button-img{
 }
 
 td.delete-button-img img{
-      width:30px; /* you can use % */
-      height: auto;
-      vertical-align: top;
-      transition: all 0.1s ease-in-out;
+  vertical-align: top;
+  transition: all 0.1s ease-in-out;
+  width:30px;
+  height: auto;
 }
 
 img:hover { 
+  cursor: pointer;
   opacity: 0.3;
-  cursor: pointer
 }
 
 span.Collapsible__trigger:hover {

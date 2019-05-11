@@ -21,7 +21,7 @@ class ResultTotal extends Component {
 
     return (
       <div className="calculator-total-result">
-        <h5 className="center purple-text">Total Component</h5>
+        <h5 className="center">Total Material Needed</h5>
         <div className="collection">
           {historyDisplay}
         </div>

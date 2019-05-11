@@ -93,7 +93,6 @@ class Form extends Component {
     return (
   
       <div className="calculator-form">
-        <h5 className="center red-text">Form Component</h5>
         <h5 className="red-text">{this.state.errorMsg}</h5>
         <form onSubmit={this.handleSubmit}>
           <div className="row">
@@ -106,7 +105,7 @@ class Form extends Component {
             <button className="btn waves-effect waves-light formbtn" >Calculate</button>
 
             {!this.props.userHistory.length === false ? (
-                <button className="btn waves-effect waves-light resultsbtn"
+                <button className="btn waves-effect waves-light results-btn"
                   type='button'
                   onClick={this.submitProfileResults}>
                   Submit Results to Profile

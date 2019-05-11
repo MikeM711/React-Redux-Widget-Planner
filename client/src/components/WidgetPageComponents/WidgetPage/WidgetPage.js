@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './WidgetPage.css'
 import Form from '../Form/Form'
 import SelectedWidgets from '../SelectedWidgets/SelectedWidgets'
 import ResultTotal from '../ResultTotal/ResultTotal'
@@ -12,7 +13,7 @@ class WidgetPage extends Component {
     return (
       <div className="widget-calculator-page">
         <Navbar />
-        <div className="container">
+        <div className="widget-calculator-container container">
           <h2 className="center blue-text">Widget Material Calculator</h2>
           <Form {...this.props}/>
 

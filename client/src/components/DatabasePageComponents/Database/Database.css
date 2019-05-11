@@ -1,6 +1,10 @@
+div.database {
+    margin-bottom: 60px
+}
+
 div.database-form {
     margin-left: 5%;
-    margin-right: 5%
+    margin-right: 5%;
 }
 
 div.widget-property-names {
@@ -8,7 +12,7 @@ div.widget-property-names {
     flex-wrap: wrap;
     margin: auto;
     padding-left: 2.5%;
-    max-width: 1200px
+    max-width: 1200px;
 }
 
 .widget-property-names.row .col.m8ths {

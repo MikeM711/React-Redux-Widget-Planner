@@ -63,7 +63,7 @@ class Database extends Component {
       <div className="database">
         <Navbar />
         <div className="database-form">
-          <h4 className="center red-text">Widget Database</h4>
+          <h3 className="center"><b>Widget Database</b></h3>
           <div className="full-db-widget-row">
             <div className="widget-property-names row" >
               <span className="widget-property-name col m8ths"><b>Edit Widget</b></span>

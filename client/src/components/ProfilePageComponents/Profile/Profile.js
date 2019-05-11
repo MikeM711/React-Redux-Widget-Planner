@@ -43,11 +43,11 @@ class Profile extends Component {
               calc={calc}
               int={i}
               widgets={widgets}
-              deleteCalc={this.handleDeleteCalc}/>
+              deleteCalc={this.handleDeleteCalc} />
           )
         })) : (
-          <div className="no-calculations">
-            <p>No calculations have been created!</p>
+          <div className="no-calculations card-panel">
+            <p className="center">No calculations have been created</p>
           </div>
         )
     ) : null
@@ -55,7 +55,7 @@ class Profile extends Component {
       <div className="profile">
         <Navbar />
         <div className="profile-container container">
-          <h3 className="center">Hello {this.props.name}</h3>
+          {this.props.name ? (<h3 className="center">Hello, {this.props.name}</h3>) : null}
           {calcList}
         </div>
       </div>

@@ -92,10 +92,10 @@ class SignIn extends Component {
     const { isWritingEmail, isWritingPassword } = this.state
 
     return (
-      <div className="sign-up">
+      <div className="sign-in">
         <Navbar />
-        <div className="sign-up-container">
-          <div className="sign-up row">
+        <div className="sign-in-container">
+          <div className="sign-in row">
             <div className="local-sign-up col s6">
 
               <form className="col s12" onSubmit={this.handleSubmit}>
