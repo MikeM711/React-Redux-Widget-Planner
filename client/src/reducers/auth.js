@@ -15,7 +15,7 @@ const initState = {
 function authReducer(state = initState, action) {
   switch (action.type) {
     case COMPONENT_MOUNT:
-      console.log('[AuthReducer] got an COMPONENT_MOUNT action')
+      console.log('[AuthReducer] got a COMPONENT_MOUNT action')
       return { ...state, errorMessage: '' }
     case AUTH_SIGN_UP:
       console.log('[AuthReducer] got an AUTH_SIGN_UP action')
