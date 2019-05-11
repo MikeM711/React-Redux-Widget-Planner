@@ -3,30 +3,48 @@ import { connect } from 'react-redux';
 
 import './SingleCalculation.css';
 class SingleCalculation extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteCalc = this.deleteCalc.bind(this)
+  }
 
   async deleteCalc(id) {
     await this.props.deleteCalc(id)
   }
 
+  findWidget = (selectWidget, reduxWidget) => {
+    for (let i = 0; i < reduxWidget.length; i++) {
+      if (selectWidget.widget === reduxWidget[i].widget) {
+        if (selectWidget.updatedAt >= reduxWidget[i].updatedAt ||
+          selectWidget.updatedAt === reduxWidget[i].updatedAt) {
+          return 'inSync'
+        } else {
+          return 'oldVer'
+        }
+      }
+    }
+    return 'notFound'
+  }
+
   render() {
     const { calc, int, widgets } = this.props
-    /*
-      - The "modifiedAt" value (select.modifiedAt) of the widgets that were used, must be
-        equal to the "modifiedAt" value of our Redux store!
 
-    */
-    console.log('singleCalulation widgets this.props', widgets)
-    console.log('singlecalculation, calc', calc)
     const caclTotal = calc.calculation_total
     const postgresDate = calc.createdAt
     const index = postgresDate.indexOf('T')
     const date = postgresDate.slice(0, index)
 
-    const calculation = calc.calculation.map(select => {
-      console.log('singlecalculation, select', select)
+    // object that will tell us if we are in sync or not
+    let sync = {}
 
-      // General structure of the comparison
-      console.log('Are the modifiedAt times different?', select.updatedAt, /*widgets[0].updatedAt*/)
+    const calculation = calc.calculation.map(select => {
+
+      const isSync = this.findWidget(select, widgets)
+
+      sync = {
+        ...sync,
+        [select.widget]: isSync
+      }
 
       return (
         <div className="single-calculation" key={select.id}>
@@ -43,6 +61,52 @@ class SingleCalculation extends Component {
           </div>
         </div>)
     })
+
+    let inSync = []
+    let notFound = []
+    let oldVer = []
+
+    for (const key in sync) {
+      const value = sync[key]
+      if (value === 'inSync') {
+        inSync.push(key)
+      }
+      if (value === 'notFound') {
+        notFound.push(key)
+      }
+      if (value === 'oldVer') {
+        // oldVer = [...oldVer , key]
+        oldVer.push(key)
+      }
+    }
+    // console.log('notFound', notFound)
+    // console.log('inSync', inSync)
+    // console.log('oldVer', oldVer)
+
+    const isNotFound = notFound.length ? (
+      <div className="not-found">
+        <b>Not Found:</b> {notFound.join(', ')}
+      </div>
+    ) : null
+
+    const isOldVer = oldVer.length ? (
+      <div className="old-version">
+        <b>Old Versions:</b> {[oldVer.join(', ')]}
+      </div>
+    ) : null
+
+    const syncResult = notFound.length === 0 && oldVer.length === 0 ? (
+      <div className="is-synced card-panel #e8f5e9 green lighten-5">
+        <h5 className="center">Results are in sync</h5>
+      </div>
+    ) : (
+        <div className="not-synced card-panel #ffebee red lighten-5">
+          <h5 className="center">Results are not in sync</h5>
+          {isNotFound}
+          {isOldVer}
+        </div>
+      )
+
     return (
       <div className="calculation-select-list card #f5f5f5 grey lighten-4" key={calc.id}>
         <h6 className="calculation-number"><b>Calculation #{int}: {date} </b></h6>
@@ -61,9 +125,7 @@ class SingleCalculation extends Component {
           <span>{caclTotal.sSteel} Sheets of Stainless Steel</span><br />
         </div>
         <hr />
-        <span>Does this reflect the database properly?</span>
-        <br />
-        <span>Was any of our widgets in the DB modified or deleted?</span>
+        {syncResult}
       </div>
     );
   }

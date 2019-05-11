@@ -11,19 +11,19 @@ class Profile extends Component {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this)
     this.handleDeleteCalc = this.handleDeleteCalc.bind(this)
+    this.state = {
+      isLoaded: false,
+    }
   }
 
   async componentDidMount() {
-    await this.props.fetchProfile()
-    /* When we enter the "Profile" page after sign in/sign up, we would like to get all of the widgets
-      in the database, so that we can instantly make comparisons. These comparisons will notify the user that their
-      calculations are synced or not synced to the widget database.
-    */
-
-    // BRING THE BELOW INTO "SINGLECALCULATION" COMPONENT INSTEAD!
-    if (this.props.widgets === [] ) {
+    if (!this.props.widgets.length) {
       await this.props.fetchWidgetsDB()
     }
+    await this.props.fetchProfile()
+    this.setState({
+      isLoaded: true
+    })
   }
 
   async handleDeleteCalc(id) {
@@ -31,22 +31,26 @@ class Profile extends Component {
   }
 
   render() {
-    let i = 0
-    const calcList = this.props.calculationDB.length ? (
-      this.props.calculationDB.map(calc => {
-        i++
-        return (
-          <SingleCalculation
-            key={calc.id}
-            calc={calc}
-            int={i}
-            deleteCalc={this.handleDeleteCalc}/>
+    let i = 0;
+    const calcList = this.state.isLoaded ? (
+      this.props.calculationDB.length ? (
+        this.props.calculationDB.map(calc => {
+          const { widgets } = this.props
+          i++
+          return (
+            <SingleCalculation
+              key={calc.id}
+              calc={calc}
+              int={i}
+              widgets={widgets}
+              deleteCalc={this.handleDeleteCalc}/>
+          )
+        })) : (
+          <div className="no-calculations">
+            <p>No calculations have been created!</p>
+          </div>
         )
-      })) : (
-        <div className="no-calculations">
-          <p>No calculations have been created!</p>
-        </div>
-      )
+    ) : null
     return (
       <div className="profile">
         <Navbar />
@@ -62,7 +66,8 @@ class Profile extends Component {
 function mapStateToProps(state) {
   return {
     name: state.profileRed.name,
-    calculationDB: state.profileRed.calculationDB
+    calculationDB: state.profileRed.calculationDB,
+    widgets: state.widgetRed.widgets
   }
 }
 
