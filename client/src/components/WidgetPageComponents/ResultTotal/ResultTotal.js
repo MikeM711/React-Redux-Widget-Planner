@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './ResultTotal.css'
+import './ResultTotal.css';
 
 class ResultTotal extends Component {
 
   render() {
-    const { userHistTotal } = this.props
- 
+    const { userHistTotal } = this.props;
+
     const historyDisplay =
       (
         <div className="total-user-result">
@@ -17,7 +17,7 @@ class ResultTotal extends Component {
           <p className="center">{userHistTotal.glass} | Glass</p>
           <p className="center">{userHistTotal.sSteel} | Stainless Steel</p>
         </div>
-      )
+      );
 
     return (
       <div className="calculator-total-result">
@@ -27,13 +27,13 @@ class ResultTotal extends Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
     userHistTotal: state.widgetRed.userHistTotal
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(ResultTotal);

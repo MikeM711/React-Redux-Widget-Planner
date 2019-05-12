@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import Collapsible from 'react-collapsible';
 
-import './SingleWidget.css'
-import deleteButton from '../../../images/delete-button.png'
+import './SingleWidget.css';
+import deleteButton from '../../../images/delete-button.png';
 
 class SingleWidget extends Component {
 
   render() {
-
-    // Destructuring off this.props
-    let { alum, crSteel, galv, glass, sSteel, widgetSelect, qtySelect, id, handleDelete } = this.props
-
-    // Return collapsible collection-items
+    let { alum, crSteel, galv, glass, sSteel, widgetSelect, qtySelect, id, handleDelete } = this.props;
     return (
       <div className="collection-item user-widget">
         <table>
           <tbody>
             <tr>
               <td className="collapsible-items">
-                <Collapsible trigger={`Widget: ${widgetSelect} | QTY: ${qtySelect}`} transitionTime={50} open={false}>
+                <Collapsible
+                  trigger={`Widget: ${widgetSelect} | QTY: ${qtySelect}`}
+                  transitionTime={50}
+                  open={false}>
                   <h6>Widget: {widgetSelect} | QTY: {qtySelect}</h6>
                   <p className="center">{alum} | Aluminum</p>
                   <p className="center">{crSteel} | Cold Rolled Steel</p>
@@ -28,19 +27,18 @@ class SingleWidget extends Component {
                 </Collapsible>
               </td>
               <td className="delete-button-img">
-                {/* <button className="delete-btn btn-floating btn-large waves-effect waves-light red" onClick={() => { handleDelete(id) }}>X</button> */}
-                <img 
-                  src={deleteButton} 
+                <img
+                  src={deleteButton}
                   alt="delete-button"
                   onClick={() => { handleDelete(id) }}
-                  />
+                />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default SingleWidget;
