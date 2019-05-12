@@ -2,50 +2,48 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './SingleCalculation.css';
+
 class SingleCalculation extends Component {
   constructor(props) {
     super(props);
-    this.deleteCalc = this.deleteCalc.bind(this)
-  }
+    this.deleteCalc = this.deleteCalc.bind(this);
+  };
 
   async deleteCalc(id) {
-    await this.props.deleteCalc(id)
-  }
+    await this.props.deleteCalc(id);
+  };
 
   findWidget = (selectWidget, reduxWidget) => {
     for (let i = 0; i < reduxWidget.length; i++) {
       if (selectWidget.widget === reduxWidget[i].widget) {
         if (selectWidget.updatedAt >= reduxWidget[i].updatedAt ||
           selectWidget.updatedAt === reduxWidget[i].updatedAt) {
-          return 'inSync'
+          return 'inSync';
         } else {
-          return 'oldVer'
-        }
-      }
-    }
-    return 'notFound'
-  }
+          return 'oldVer';
+        };
+      };
+    };
+    return 'notFound';
+  };
 
   render() {
-    const { calc, int, widgets } = this.props
+    const { calc, int, widgets } = this.props;
 
-    const caclTotal = calc.calculation_total
-    const postgresDate = calc.createdAt
-    const index = postgresDate.indexOf('T')
-    const date = postgresDate.slice(0, index)
+    const caclTotal = calc.calculation_total;
+    const postgresDate = calc.createdAt;
+    const index = postgresDate.indexOf('T');
+    const date = postgresDate.slice(0, index);
 
     // object that will tell us if we are in sync or not
-    let sync = {}
+    let sync = {};
 
     const calculation = calc.calculation.map(select => {
-
-      const isSync = this.findWidget(select, widgets)
-
+      const isSync = this.findWidget(select, widgets);
       sync = {
         ...sync,
         [select.widget]: isSync
-      }
-
+      };
       return (
         <div className="single-calculation" key={select.id}>
           <br />
@@ -59,25 +57,27 @@ class SingleCalculation extends Component {
             <span>{select.glass} Sheets of Glass, </span>
             <span>{select.sSteel} Sheets of Stainless Steel </span>
           </div>
-        </div>)
-    })
+        </div>
+      );
+    });
 
-    let inSync = []
-    let notFound = []
-    let oldVer = []
+    let inSync = [];
+    let notFound = [];
+    let oldVer = [];
 
     for (const key in sync) {
-      const value = sync[key]
+      const value = sync[key];
       if (value === 'inSync') {
-        inSync.push(key)
-      }
+        inSync.push(key);
+      };
       if (value === 'notFound') {
-        notFound.push(key)
-      }
+        notFound.push(key);
+      };
       if (value === 'oldVer') {
-        oldVer.push(key)
-      }
-    }
+        oldVer.push(key);
+      };
+    };
+
     // console.log('notFound', notFound)
     // console.log('inSync', inSync)
     // console.log('oldVer', oldVer)
@@ -86,13 +86,13 @@ class SingleCalculation extends Component {
       <div className="not-found">
         <b>Not Found:</b> {notFound.join(', ')}
       </div>
-    ) : null
+    ) : null;
 
     const isOldVer = oldVer.length ? (
       <div className="old-version">
         <b>Old Versions:</b> {[oldVer.join(', ')]}
       </div>
-    ) : null
+    ) : null;
 
     const syncResult = notFound.length === 0 && oldVer.length === 0 ? (
       <div className="is-synced card-panel #e8f5e9 green lighten-5">
@@ -104,14 +104,13 @@ class SingleCalculation extends Component {
           {isNotFound}
           {isOldVer}
         </div>
-      )
+      );
 
     return (
       <div className="calculation-select-list card #f5f5f5 grey lighten-4" key={calc.id}>
         <h6 className="calculation-number"><b>Calculation #{int}: {date} </b></h6>
         <button href="" className="#e57373 waves-effect waves-light btn delete-calculation-btn red lighten-2"
-          onClick={() => { this.deleteCalc(calc.id) }}
-        >Delete</button>
+          onClick={() => { this.deleteCalc(calc.id) }}>Delete</button>
         <br />
         {calculation}
         <hr />
@@ -127,13 +126,13 @@ class SingleCalculation extends Component {
         {syncResult}
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
     widgets: state.widgetRed.widgets
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(SingleCalculation);
