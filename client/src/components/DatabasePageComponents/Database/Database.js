@@ -9,40 +9,34 @@ import * as actions from '../../../actions'
 
 class Database extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleAddWidgetToDB = this.handleAddWidgetToDB.bind(this);
     this.handleDeleteWidgetDB = this.handleDeleteWidgetDB.bind(this);
     this.handleUpdateWidgetDB = this.handleUpdateWidgetDB.bind(this);
-  }
+  };
 
   async componentDidMount() {
     if (!this.props.widgets.length) {
-      await this.props.fetchWidgetsDB()
-    }
-  }
+      await this.props.fetchWidgetsDB();
+    };
+  };
 
   async handleAddWidgetToDB(data) {
-    console.log(data)
-    this.props.addWidgetDB(data)
-  }
+    await this.props.addWidgetDB(data)
+  };
 
   async handleDeleteWidgetDB(id) {
-    // delete widget in the database
-    await this.props.deleteWidgetDB(id)
-  }
+    await this.props.deleteWidgetDB(id);
+  };
 
   async handleUpdateWidgetDB(data) {
-    console.log('Database received update', data)
-    await this.props.updateWidgetDB(data)
-  }
+    await this.props.updateWidgetDB(data);
+  };
 
   render() {
-    console.log('database', this.props.widgets)
-    // Some JSX for the list of widgets inside Select
     const widgetList = this.props.widgets.map(widgetInfo => {
-      // console.log(widgetInfo)
       return (
         <DatabaseWidget
           key={widgetInfo.id}
@@ -56,8 +50,8 @@ class Database extends Component {
           DeleteWidgetDB={this.handleDeleteWidgetDB}
           updateWidgetDB={this.handleUpdateWidgetDB}
         />
-      )
-    })
+      );
+    });
 
     return (
       <div className="database">
@@ -79,17 +73,17 @@ class Database extends Component {
           </div>
         </div>
         <AddWidget
-          addWidgetToDB={this.handleAddWidgetToDB} 
-          />
+          addWidgetToDB={this.handleAddWidgetToDB}
+        />
       </div>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
     widgets: state.widgetRed.widgets
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, actions)(Database);
