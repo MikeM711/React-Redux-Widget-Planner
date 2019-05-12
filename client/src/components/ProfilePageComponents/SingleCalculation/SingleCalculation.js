@@ -96,11 +96,12 @@ class SingleCalculation extends Component {
 
     const syncResult = notFound.length === 0 && oldVer.length === 0 ? (
       <div className="is-synced card-panel #e8f5e9 green lighten-5">
-        <h5 className="center">Results are in sync</h5>
+        <h5 className="center">Results are in sync with database</h5>
       </div>
     ) : (
         <div className="not-synced card-panel #ffebee red lighten-5">
-          <h5 className="center">Results are not in sync</h5>
+          <h5 className="center">Results are not in sync with database</h5>
+          <br />
           {isNotFound}
           {isOldVer}
         </div>

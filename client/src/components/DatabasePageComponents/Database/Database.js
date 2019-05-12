@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './Database.css'
-import Navbar from '../../Navbar/Navbar'
-import DatabaseWidget from '../DatabaseWidget/DatabaseWidget'
-import AddWidget from '../AddWidget/AddWidget'
-import * as actions from '../../../actions'
+import './Database.css';
+import Navbar from '../../Navbar/Navbar';
+import DatabaseWidget from '../DatabaseWidget/DatabaseWidget';
+import AddWidget from '../AddWidget/AddWidget';
+import * as actions from '../../../actions';
 
 class Database extends Component {
 

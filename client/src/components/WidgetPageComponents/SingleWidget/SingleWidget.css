@@ -10,7 +10,7 @@ td.delete-button-img img{
   height: auto;
 }
 
-img:hover { 
+img.delete-button-x:hover { 
   cursor: pointer;
   opacity: 0.3;
 }

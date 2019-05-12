@@ -27,7 +27,7 @@ class SingleWidget extends Component {
                 </Collapsible>
               </td>
               <td className="delete-button-img">
-                <img
+                <img className="delete-button-x"
                   src={deleteButton}
                   alt="delete-button"
                   onClick={() => { handleDelete(id) }}
