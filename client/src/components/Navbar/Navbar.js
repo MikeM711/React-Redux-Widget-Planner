@@ -30,9 +30,9 @@ class Navbar extends Component {
 							}
 
 							{this.props.isAuth ?
-								([<li key="signout"><Link to="/signout" onClick={this.signOut}>Sign Out</Link></li>,
-								<li key="profile"><Link to="/profile">Profile</Link></li>,
-								<li key="database"><Link to="/database">Database</Link></li>
+								([<li key="profile"><Link to="/profile">Profile</Link></li>,
+								<li key="database"><Link to="/database">Database</Link></li>,
+								<li key="signout"><Link to="/signout" onClick={this.signOut}>Sign Out</Link></li>
 								]) : null
 							}
 

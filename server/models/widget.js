@@ -1,14 +1,10 @@
 module.exports = function (sequelize, Sequelize) {
-
   const WidgetExport = sequelize.define('widget', {
-
-    // Always have some sort of ID for postgres
     id: {
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-
     name: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -16,7 +12,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
     aluminum: {
       type: Sequelize.NUMERIC,
       allowNull: false,
@@ -24,7 +19,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
     cold_rolled_steel: {
       type: Sequelize.NUMERIC,
       allowNull: false,
@@ -32,7 +26,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
     galvanneal: {
       type: Sequelize.NUMERIC,
       allowNull: false,
@@ -40,7 +33,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
     glass: {
       type: Sequelize.NUMERIC,
       allowNull: false,
@@ -48,7 +40,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
     stainless_steel: {
       type: Sequelize.NUMERIC,
       allowNull: false,
@@ -56,9 +47,6 @@ module.exports = function (sequelize, Sequelize) {
         notEmpty: true,
       }
     },
-
-  })
-
+  });
   return WidgetExport;
-
-}
+};
