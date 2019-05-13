@@ -95,3 +95,7 @@ REACT_APP_GOOGLE_CLIENT_KEY=<your-google-client-key>
 2. Create local DB `widget_calculator`.
 3. Run `npm run start-dev` to start the application.
 4. Navigate to `http://localhost:3000`.
+
+## Special Thanks ##
+
+A shout-out to [react-collapsible](https://github.com/glennflanagan/react-collapsible) for their neat Collapsible component, highly recommended.
