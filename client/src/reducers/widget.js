@@ -46,7 +46,7 @@ function widgetReducer(state = initState, action) {
       const sumHistory = wgtHistTotal(state.userHistory);
       return { ...state, userHistTotal: sumHistory };
     case CLEAR_USER_HISTORY:
-      console.log('[WidgetReducer] got a CLEAER_USER_HISTORY action');
+      console.log('[WidgetReducer] got a CLEAR_USER_HISTORY action');
       return { ...state, userHistory: [], userHistTotal: '' };
     default:
       return state;
