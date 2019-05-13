@@ -1,7 +1,7 @@
 {
-  "name": "react-wb-door-calculator",
+  "name": "react-redux-widget-calculator",
   "version": "1.0.0",
-  "description": "Widget Calculator with authentication and database manipulation",
+  "description": "Widget Calculator, based on the application I use for work, with authentication and database manipulation",
   "engines": {
     "node": "8.11.1",
     "npm": "6.8.0"
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MikeM711/React-Redux-WB-Door-Calculator.git"
+    "url": "git+https://github.com/MikeM711/React-Redux-Widget-Calculator.git"
   },
   "author": "Michael McCabe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MikeM711/React-Redux-WB-Door-Calculator/issues"
+    "url": "https://github.com/MikeM711/React-Redux-Widget-Calculator/issues"
   },
-  "homepage": "https://github.com/MikeM711/React-Redux-WB-Door-Calculator#readme",
+  "homepage": "https://github.com/MikeM711/React-Redux-Widget-Calculator#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
