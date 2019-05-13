@@ -2,11 +2,16 @@
   "name": "react-wb-door-calculator",
   "version": "1.0.0",
   "description": "Widget Calculator with authentication and database manipulation",
+  "engines": {
+    "node": "8.11.1",
+    "npm": "6.8.0"
+  },
   "main": "server.js",
   "scripts": {
     "server-dev": "nodemon server.js",
     "client-dev": "npm start --prefix client",
-    "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
+    "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,6 +28,7 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3",
     "joi": "^14.3.1",

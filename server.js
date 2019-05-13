@@ -1,10 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
+const dotenv = require('dotenv').config();
 const models = require('./server/models');
 const routes = require('./server/routes');
 
 const app = express();
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // Allowed origins
 const corsOptions = {
@@ -22,6 +27,11 @@ app.use(bodyParser.json());
 
 // routes
 app.use('/', routes);
+
+// Handles any requests that do not match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 

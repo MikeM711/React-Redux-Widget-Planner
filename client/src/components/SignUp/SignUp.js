@@ -134,7 +134,7 @@ class SignUp extends Component {
               </div>
               <div className="login-container center">
                 <GoogleLogin
-                  clientId={'920654343788-ngguegn79nillrufq91h5d4vjoth4e5t.apps.googleusercontent.com'}
+                  clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_KEY}`}
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                   cookiePolicy={'single_host_origin'}>
