@@ -6,10 +6,15 @@ const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const bCrypt = require('bcryptjs');
 const { user } = require('../../models');
 
+// If we are not running production, use local keys
+if (!process.env.NODE_ENV) {
+  var config = require('../keys');
+};
+
 // JSON WEB TOKEN STRATEGY
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: `${process.env.JWT_SECRET}`
+  secretOrKey: `${process.env.JWT_SECRET}` || config.JWT_SECRET
 }, (payload, done) => {
   // Find the users specified in token
   user.findOne({
@@ -38,8 +43,8 @@ const clientSecretKey = process.env.GOOGLE_SECRET_KEY;
 
 // GOOGLE OAUTH STRATEGY
 passport.use('googleToken', new GooglePlusTokenStrategy({
-  clientID: `${clientIdKey}`,
-  clientSecret: `${clientSecretKey}`
+  clientID: `${clientIdKey}` || config.google.clientID,
+  clientSecret: `${clientSecretKey}` || config.google.clientSecret
 }, (accessToken, refreshToken, profile, done) => {
   // Check whether this current user exists in the database
   user.findOne({

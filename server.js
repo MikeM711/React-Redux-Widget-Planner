@@ -6,6 +6,11 @@ const dotenv = require('dotenv').config();
 const models = require('./server/models');
 const routes = require('./server/routes');
 
+// If we are not running production, use local keys
+if (!process.env.NODE_ENV) {
+  var config = require('./server/config/keys');
+};
+
 const app = express();
 
 // Serve the static files from the React app
@@ -13,7 +18,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 
 // Allowed origins
 const corsOptions = {
-  origin: `${process.env.ALLOWED_ORIGINS}`,
+  origin: `${process.env.ALLOWED_ORIGINS}` || config.ALLOWED_ORIGINS,
   optionsSuccessStatus: 200
 };
 
@@ -29,8 +34,8 @@ app.use(bodyParser.json());
 app.use('/', routes);
 
 // Handles any requests that do not match the ones above
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
