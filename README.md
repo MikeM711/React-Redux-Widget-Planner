@@ -92,19 +92,10 @@ module.exports = {
 
 **Environment Variables**
 
-Server: Create a `.env` file inside the `root` directory, and add the following variables to pass into the application's server environment.
+Create a `.env` file inside the `/client` directory, and add the following variables to pass into the application's client environment.
 
 ```
-GOOGLE_CLIENT_KEY=<your-google-client-key>
-GOOGLE_SECRET_KEY=<your-google-secret-key>
-JWT_SECRET=<your-JWT-secret>
-ALLOWED_ORIGINS=<app-host-url>
-```
-
-Client: Create a `.env` file inside the `/client` directory, and add the following variables to pass into the application's client environment.
-
-```
-REACT_APP_GOOGLE_CLIENT_KEY=<your-google-client-key>
+REACT_APP_GOOGLE_CLIENT_KEY=<your-google-client-id>
 ```
 
 #### Run the Application
