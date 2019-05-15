@@ -3,7 +3,7 @@ A CRUD widget/authentication application, built with React.js, Redux, Node.js, E
 
 This application is a demo of what I use for work, which replaces my old [WB Door Calculator](https://github.com/MikeM711/WB-Door-Calculator) and [SF Cabinet Calculator](https://github.com/MikeM711/SF-Cabinet-Calculator) angular.js applications.  
 
-You can check out this application on [Heroku](https://widget-calculator.herokuapp.com/).
+Check out the application here: https://widget-calculator.herokuapp.com/
 
 ## About ##
 
