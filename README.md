@@ -92,7 +92,7 @@ module.exports = {
 
 **Environment Variables**
 
-Create a `.env` file inside the `/client` directory, and add the following variables to pass into the application's client environment.
+Create a `.env` file inside the `/client` directory, and add the following variable to pass into the application's client environment.
 
 ```
 REACT_APP_GOOGLE_CLIENT_KEY=<your-google-client-id>
