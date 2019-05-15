@@ -75,6 +75,21 @@ Create a new project inside [Google Console Developers](https://console.develope
 
 If running locally, your `Authorized JavaScript origins` should be set to `http://localhost:3000` 
 
+**Application Keys**
+
+Inside the `server/config` directory, create a `keys.js` file, and add the following:
+
+```
+module.exports = {
+  google: {
+    clientID: <your-google-client-id>,
+    clientSecret: <your-google-client-secret>
+  },
+  JWT_SECRET: "yourjwtsecret",
+  ALLOWED_ORIGINS: "http://localhost:3000"
+}
+```
+
 **Environment Variables**
 
 Server: Create a `.env` file inside the `root` directory, and add the following variables to pass into the application's server environment.
