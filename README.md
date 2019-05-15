@@ -1,5 +1,5 @@
 # React-Redux-Widget-Calculator
-A CRUD widget/authentication application, built with React.js, Redux, Node.js, Express.js, Sequelize.js, PostgreSQL and Passport.js.
+A full stack CRUD widget/authentication application, built with React.js, Redux, Node.js, Express.js, Sequelize.js, PostgreSQL and Passport.js.
 
 This application is a demo of what I use for work, which replaces my old [WB Door Calculator](https://github.com/MikeM711/WB-Door-Calculator) and [SF Cabinet Calculator](https://github.com/MikeM711/SF-Cabinet-Calculator) angular.js applications.  
 
