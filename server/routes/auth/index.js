@@ -12,8 +12,21 @@ router.route('/signup')
 router.route('/signin')
   .post(validateBody(schemas.authSchema), passportSignIn, UsersController.signIn);
 
+// below googleToken is deprecated
+// router.route('/oauth/google')
+//   .post(passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth);
+
+// deleted: { session: false } 
 router.route('/oauth/google')
-  .post(passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth);
+  .get(passport.authenticate('google', { scope: ['profile'] }), UsersController.googleOAuth);
+
+router.route('/auth/google/callback')
+  .get(passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+      console.log('inside /auth/google/callback')
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
 
 router.route('/profile')
   .get(passport.authenticate('jwt', { session: false }), UsersController.profile);
