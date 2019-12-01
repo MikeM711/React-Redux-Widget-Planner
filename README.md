@@ -128,3 +128,6 @@ The above solution attempts produced an incorrect `access_token` according to my
 
 **Conclusion**
 The best course of action for logging into Google is to [migrate to passport-google-oauth20](https://medium.com/passportjs/google-api-shutdown-330c3b47e3df)
+
+**EDIT: A Better solution**
+Try the following package instead: https://www.npmjs.com/package/passport-token-google
