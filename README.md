@@ -5,6 +5,10 @@ This application is a demo of what I use for work, which replaces my old [WB Doo
 
 Check out the application here: https://widget-calculator.herokuapp.com/
 
+# Demo
+
+![demo](https://raw.githubusercontent.com/MikeM711/React-Redux-Widget-Calculator/master/demo/widget-calculator-demo.gif)
+
 ## About ##
 
 ### Authentication ###

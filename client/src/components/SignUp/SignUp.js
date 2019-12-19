@@ -81,6 +81,8 @@ class SignUp extends Component {
   };
 
   async responseGoogle(res) {
+    console.log(res.accessToken)
+    // debugger;
     await this.props.oauthGoogle(res.accessToken);
     if (!this.props.errorMessage) {
       this.props.history.push('/profile');
