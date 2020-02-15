@@ -1,4 +1,4 @@
-# React-Redux-Widget-Calculator
+# React-Redux-Widget-Planner
 A full stack CRUD widget/authentication application, built with React.js, Redux, Node.js, Express.js, Sequelize.js, PostgreSQL and Passport.js.
 
 This application is a demo of what I use for work, which replaces my old [WB Door Calculator](https://github.com/MikeM711/WB-Door-Calculator) and [SF Cabinet Calculator](https://github.com/MikeM711/SF-Cabinet-Calculator) angular.js applications.  
@@ -19,7 +19,7 @@ This full stack application can only be accessed when a user is authenticated.  
 
 All authenticated users have the ability to create, update and delete Widgets in the "Database" route of the application. The name and values that the user provides will instantly be accessible in the dropdown menu in the "Widget Calculator" navigation route, and visible for every user.
 
-### Widget Material Calculator ###
+### Widget Material Planner Calculations ###
 
 All dropdown menu items reflect the Widget Database.
 
@@ -27,9 +27,9 @@ To calculate how much material is needed to fulfill a job of Widgets, select you
 
 You may view the Widget material data by clicking the "blue collapsible bar". You may also delete the selected Widget from your calculation by clicking the "X" button beside it.
 
-### Saving Calculations to your Profile ###
+### Saving Production Plans to your Profile ###
 
-Once you have finished estimating the material needed to fulfill a job of Widgets, you may click the "Submit Results To Profile" button. This action will save your calculation to your personal profile.  All users have their own personal profile, which is only visible to the respective user. You may save as many calculations to your profile as you wish, and delete them if you choose.
+Once you have finished estimating the material needed to fulfill a job of Widgets, you may click the "Submit Results To Profile" button. This action will save your calculation and plans to your personal profile.  All users have their own personal profile, which is only visible to the respective user. You may save as many production plans to your profile as you wish, and delete them if you choose.
 
 ### Checking for Profile Synchronicity with the Widget Database ###
 
