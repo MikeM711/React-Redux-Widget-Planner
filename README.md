@@ -1,5 +1,5 @@
 # React-Redux-Widget-Planner
-A full stack CRUD widget/authentication application, built with React.js, Redux, Node.js, Express.js, Sequelize.js, PostgreSQL and Passport.js.
+A full stack CRUD widget/authentication application, built with React.js, Redux, Node.js, Express.js, Sequelize.js, PostgreSQL and Passport.js. You may authenticate locally or by using your Google account.
 
 This application is a demo of what I use for work, which replaces my old [WB Door Calculator](https://github.com/MikeM711/WB-Door-Calculator) and [SF Cabinet Calculator](https://github.com/MikeM711/SF-Cabinet-Calculator) angular.js applications.  
 
@@ -113,25 +113,3 @@ REACT_APP_GOOGLE_CLIENT_KEY=<your-google-client-id>
 ## Special Thanks ##
 
 A shout-out to [react-collapsible](https://github.com/glennflanagan/react-collapsible) for their neat Collapsible component, highly recommended.
-
-## Update for Nov 2019
-
-As of now, along with the deprecation of Google+ APIs, Legacy People API is currently not in effect anymore. The best course of action is to switch from using `access_tokens`, to using the full `passport-google-oauth20` strategy to sign in a Google user.
-
-### Details
-
-**Problem:**
-- The `access_token` delivered from `react-google-login` does not successfully open my Google Token authentication strategy, despite [Google Playground's](https://developers.google.com/oauthplayground/) ability of generating a correct `access_token` (check off Google OAuth API v2: `.email` and `.profile` scopes)
-- When using this incorrect `access_token`, the error message reads `InternalOAuthError: Legacy People API has not been used in project...`. However, Legacy People API cannot be enabled for my project
-
-**Solution Attempts:**
-- Used `react-google-oauth` as a Google login button
-- Created my own Google login button using HTML `<script src="https://apis.google.com/js/platform.js"></script>` and the `gapi.signin2.render(...)` function, as well as the necessary JSX
-
-The above solution attempts produced an incorrect `access_token` according to my token strategy, which leads me to believe that the token strategy I am using is now fully deprecated.
-
-**Conclusion**
-The best course of action for logging into Google is to [migrate to passport-google-oauth20](https://medium.com/passportjs/google-api-shutdown-330c3b47e3df)
-
-**EDIT: A Better solution**
-Try the following package instead: https://www.npmjs.com/package/passport-token-google

@@ -2,9 +2,7 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
-// const GooglePlusTokenStrategy = require('passport-google-plus-token'); // delete when finished
-const GoogleStrategy = require('passport-token-google2').Strategy
-// var GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleTokenStrategy = require('passport-google-token').Strategy;
 const bCrypt = require('bcryptjs');
 const { user } = require('../../models');
 
@@ -12,6 +10,14 @@ const { user } = require('../../models');
 if (!process.env.NODE_ENV) {
   var config = require('../keys');
 };
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
 
 // JSON WEB TOKEN STRATEGY
 passport.use(new JwtStrategy({
@@ -43,30 +49,12 @@ passport.use(new JwtStrategy({
 const clientIdKey = process.env.GOOGLE_CLIENT_KEY;
 const clientSecretKey = process.env.GOOGLE_SECRET_KEY;
 
-// passport.use(new GoogleStrategy({
-//   clientID: `${clientIdKey}` || config.google.clientID,
-//   clientSecret: `${clientSecretKey}` || config.google.clientSecret,
-//   // callbackURL: "http://www.example.com/auth/google/callback"
-//   callbackURL: 'http://localhost:3000/auth/oauth/google/callback'
-// },
-// function(accessToken, refreshToken, profile, cb) {
-//   console.log('new GoogleStrategy')
-//   // we want the profile so we can log the user into the database
-//   // very similar to the Google Oauth Token Strategy
-
-//   // we'll want return the user we get from the database as the 2nd param of done()  
-//   return done(null, 'our user - either exiting or new');
-// }
-// ));
-
 
 // GOOGLE OAUTH TOKEN STRATEGY
-// as of this current period of time, this strategy is deprecated because Google+ Sign-In is deprecated
-passport.use(new GoogleStrategy({
+passport.use(new GoogleTokenStrategy({
   clientID: `${clientIdKey}` || config.google.clientID,
   clientSecret: `${clientSecretKey}` || config.google.clientSecret
 }, (accessToken, refreshToken, profile, done) => {
-  console.log('hit')
   // Check whether this current user exists in the database
   user.findOne({
     where: {

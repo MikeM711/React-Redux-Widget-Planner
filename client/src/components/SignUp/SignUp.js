@@ -130,7 +130,7 @@ class SignUp extends Component {
                 </div>
               </form>
             </div>
-            {/* <div className="local-sign-in col s6">
+            <div className="local-sign-in col s6">
               <div className="card-panel #e3f2fd blue lighten-5 center">
                 <h6>Or, sign up using Google</h6>
               </div>
@@ -143,7 +143,7 @@ class SignUp extends Component {
                   <span>Google Sign Up</span>
                 </GoogleLogin>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

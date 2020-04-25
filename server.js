@@ -5,6 +5,7 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 const models = require('./server/models');
 const routes = require('./server/routes');
+const passport = require('passport');
 
 // If we are not running production, use local keys
 if (!process.env.NODE_ENV) {
@@ -29,6 +30,9 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // routes
 app.use('/', routes);

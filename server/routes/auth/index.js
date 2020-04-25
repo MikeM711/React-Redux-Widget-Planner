@@ -13,19 +13,7 @@ router.route('/signin')
   .post(validateBody(schemas.authSchema), passportSignIn, UsersController.signIn);
 
 router.route('/oauth/google')
-  .post(passport.authenticate('google-token', { session: false }), UsersController.googleOAuth);
-
-// deleted: { session: false } 
-// router.route('/oauth/google')
-//   .get(passport.authenticate('google', { scope: ['profile'] }), UsersController.googleOAuth);
-
-// router.route('/auth/google/callback')
-//   .get(passport.authenticate('google', { failureRedirect: '/login' }),
-//     function (req, res) {
-//       console.log('inside /auth/google/callback')
-//       // Successful authentication, redirect home.
-//       res.redirect('/');
-//     });
+  .post(passport.authenticate('google-token'), UsersController.googleOAuth);
 
 router.route('/profile')
   .get(passport.authenticate('jwt', { session: false }), UsersController.profile);
